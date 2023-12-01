@@ -12,5 +12,5 @@ Site created by me (Sarah) using:
 - Apollo
 - GraphQL
 - Keystone
-- MongoDB
+- MongoDB Atlas
 
