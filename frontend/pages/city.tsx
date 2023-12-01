@@ -1,5 +1,5 @@
 export default function cityPage() {
   return <div>
-    Hello!
+    City page!
   </div>
 }
