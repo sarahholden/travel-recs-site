@@ -20,7 +20,9 @@ export const Destination = list({
         displayMode: 'textarea',
       },
     }),
-    guide: relationship({ ref: 'Guide.destinations' }),
+    guide: relationship({
+      ref: 'Guide.destinations',
+    }),
     photo: relationship({
       ref: 'DestinationImage.destination',
       many: true,

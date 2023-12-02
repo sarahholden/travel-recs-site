@@ -3,7 +3,7 @@ import { ServerStyleSheet } from "styled-components";
 
 // TODO: Fix this type error
 class MyDocument extends Document {
-  static getInitialProps(ctx: DocumentContext) {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const {renderPage} = ctx;
     const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
