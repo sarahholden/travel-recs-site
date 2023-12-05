@@ -1289,10 +1289,10 @@ export type _KsListsMetaInput = {
   key?: InputMaybe<Scalars['String']>;
 };
 
-export type All_Guides_QueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllGuidesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type All_Guides_QueryQuery = { __typename?: 'Query', allGuides?: Array<{ __typename?: 'Guide', id: string, name?: string | null, location_info?: string | null, status?: string | null, destinations: Array<{ __typename?: 'Destination', name?: string | null, hover_description?: string | null, photo: Array<{ __typename?: 'DestinationImage', image?: { __typename?: 'CloudinaryImage_File', publicUrlTransformed?: string | null } | null }> }> } | null> | null };
+export type AllGuidesQueryQuery = { __typename?: 'Query', allGuides?: Array<{ __typename?: 'Guide', id: string, name?: string | null, location_info?: string | null, status?: string | null, destinations: Array<{ __typename?: 'Destination', name?: string | null, hover_description?: string | null, photo: Array<{ __typename?: 'DestinationImage', image?: { __typename?: 'CloudinaryImage_File', publicUrlTransformed?: string | null } | null }> }> } | null> | null };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1300,8 +1300,8 @@ export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 export type UserQuery = { __typename?: 'Query', authenticatedItem?: { __typename?: 'User', id: string, name?: string | null, email?: string | null } | null };
 
 
-export const All_Guides_QueryDocument = gql`
-    query ALL_GUIDES_QUERY {
+export const AllGuidesQueryDocument = gql`
+    query allGuidesQuery {
   allGuides {
     id
     name
@@ -1321,33 +1321,33 @@ export const All_Guides_QueryDocument = gql`
     `;
 
 /**
- * __useAll_Guides_QueryQuery__
+ * __useAllGuidesQueryQuery__
  *
- * To run a query within a React component, call `useAll_Guides_QueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useAll_Guides_QueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAllGuidesQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllGuidesQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAll_Guides_QueryQuery({
+ * const { data, loading, error } = useAllGuidesQueryQuery({
  *   variables: {
  *   },
  * });
  */
-export function useAll_Guides_QueryQuery(baseOptions?: Apollo.QueryHookOptions<All_Guides_QueryQuery, All_Guides_QueryQueryVariables>) {
+export function useAllGuidesQueryQuery(baseOptions?: Apollo.QueryHookOptions<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<All_Guides_QueryQuery, All_Guides_QueryQueryVariables>(All_Guides_QueryDocument, options);
+        return Apollo.useQuery<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>(AllGuidesQueryDocument, options);
       }
-export function useAll_Guides_QueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<All_Guides_QueryQuery, All_Guides_QueryQueryVariables>) {
+export function useAllGuidesQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<All_Guides_QueryQuery, All_Guides_QueryQueryVariables>(All_Guides_QueryDocument, options);
+          return Apollo.useLazyQuery<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>(AllGuidesQueryDocument, options);
         }
-export type All_Guides_QueryQueryHookResult = ReturnType<typeof useAll_Guides_QueryQuery>;
-export type All_Guides_QueryLazyQueryHookResult = ReturnType<typeof useAll_Guides_QueryLazyQuery>;
-export type All_Guides_QueryQueryResult = Apollo.QueryResult<All_Guides_QueryQuery, All_Guides_QueryQueryVariables>;
-export function refetchAll_Guides_QueryQuery(variables?: All_Guides_QueryQueryVariables) {
-      return { query: All_Guides_QueryDocument, variables: variables }
+export type AllGuidesQueryQueryHookResult = ReturnType<typeof useAllGuidesQueryQuery>;
+export type AllGuidesQueryLazyQueryHookResult = ReturnType<typeof useAllGuidesQueryLazyQuery>;
+export type AllGuidesQueryQueryResult = Apollo.QueryResult<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>;
+export function refetchAllGuidesQueryQuery(variables?: AllGuidesQueryQueryVariables) {
+      return { query: AllGuidesQueryDocument, variables: variables }
     }
 export const UserDocument = gql`
     query User {

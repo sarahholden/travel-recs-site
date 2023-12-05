@@ -1,4 +1,4 @@
-query ALL_GUIDES_QUERY {
+query allGuidesQuery {
   allGuides {
     id
     name
