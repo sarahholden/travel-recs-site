@@ -25,13 +25,13 @@ const ALL_GUIDES_QUERY = gql`
 
 export default function Guides() {
   const {data, error, loading} = useQuery(ALL_GUIDES_QUERY);
-  const guides = data?.allGuides;
-  console.log(guides, error, loading);
+  console.log(data, error, loading);
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error.message}</p>
+  if (!data) return <p>There was an error loading this page.</p>
   return (
     <div>
-      {guides.map(guide => <Guide key={guide.id} guide={guide}/>)}
+      {data.allGuides.map(guide => <Guide key={guide.id} guide={guide}/>)}
     </div>
   )
 }

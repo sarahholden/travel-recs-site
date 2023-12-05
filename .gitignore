@@ -2,7 +2,6 @@ node_modules/
 .DS_Store
 *.log
 haters/
-.next/
 .build/
 layout.md
 variables.env
@@ -11,3 +10,7 @@ variables.env
 *.db
 *.nvm/
 .nvm/
+node_modules
+.keystone
+.env
+.env.local

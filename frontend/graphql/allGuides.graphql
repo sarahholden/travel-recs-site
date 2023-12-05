@@ -1,0 +1,17 @@
+query ALL_GUIDES_QUERY {
+  allGuides {
+    id
+    name
+    location_info
+    status
+    destinations {
+      name
+      hover_description
+      photo {
+        image {
+          publicUrlTransformed
+        }
+      }
+    }
+  }
+}
