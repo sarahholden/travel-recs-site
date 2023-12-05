@@ -1,5 +1,1 @@
-export default function indexPage() {
-  return <div>
-    Hello!
-  </div>
-}
+export { default } from './guides'

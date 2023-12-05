@@ -5,7 +5,7 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <Link href="/city">City</Link>
+          <Link href="/guides">Guides</Link>
         </li>
         <li>
           <Link href="/account">Account</Link>
