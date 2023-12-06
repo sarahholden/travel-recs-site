@@ -8,13 +8,13 @@ export default function SingleGuide({id}: {id: string }) {
   console.log(data)
 
   return (
-    data?.Guide && (
+    data?.Guide ? (
       <div>
         {data.Guide.name}
         {data.Guide.location_info}
         {data.Guide.destinations?.map(destination => destination.name)}
       </div>
-    )
+    ) : null
 
   )
 }
