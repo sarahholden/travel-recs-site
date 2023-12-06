@@ -5,9 +5,11 @@ query allGuidesQuery {
     location_info
     status
     destinations {
+      id
       name
       hover_description
       photo {
+        id
         image {
           publicUrlTransformed
         }
@@ -15,3 +17,12 @@ query allGuidesQuery {
     }
   }
 }
+
+
+# export type DestinationImage = {
+#   __typename?: 'DestinationImage';
+#   altText?: Maybe<Scalars['String']>;
+#   destination?: Maybe<Destination>;
+#   id: Scalars['ID'];
+#   image?: Maybe<CloudinaryImage_File>;
+# };

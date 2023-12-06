@@ -1,0 +1,20 @@
+query getGuide($id: ID!) {
+  Guide(where: { id: $id }) {
+    id
+    name
+    location_info
+    status
+    destinations {
+      id
+      name
+      hover_description
+      photo {
+        id
+        image {
+          publicUrlTransformed
+        }
+      }
+    }
+    
+  }
+}

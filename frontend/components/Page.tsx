@@ -45,12 +45,20 @@ const GlobalStyles = createGlobalStyle`
 
 `;
 
+const PageWrapperStyles = styled.div`
+  padding-left: 7rem;
+  padding-right: 7rem;
+`
+
 export default function Page({children}: PageProps) {
   return (
     <div>
       <GlobalStyles/>
-      <Header/>
-      {children}
+
+      <PageWrapperStyles>
+        <Header/>
+        {children}
+      </PageWrapperStyles>
     </div>
   )
 }

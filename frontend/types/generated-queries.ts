@@ -1292,7 +1292,14 @@ export type _KsListsMetaInput = {
 export type AllGuidesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllGuidesQueryQuery = { __typename?: 'Query', allGuides?: Array<{ __typename?: 'Guide', id: string, name?: string | null, location_info?: string | null, status?: string | null, destinations: Array<{ __typename?: 'Destination', name?: string | null, hover_description?: string | null, photo: Array<{ __typename?: 'DestinationImage', image?: { __typename?: 'CloudinaryImage_File', publicUrlTransformed?: string | null } | null }> }> } | null> | null };
+export type AllGuidesQueryQuery = { __typename?: 'Query', allGuides?: Array<{ __typename?: 'Guide', id: string, name?: string | null, location_info?: string | null, status?: string | null, destinations: Array<{ __typename?: 'Destination', id: string, name?: string | null, hover_description?: string | null, photo: Array<{ __typename?: 'DestinationImage', id: string, image?: { __typename?: 'CloudinaryImage_File', publicUrlTransformed?: string | null } | null }> }> } | null> | null };
+
+export type GetGuideQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetGuideQuery = { __typename?: 'Query', Guide?: { __typename?: 'Guide', id: string, name?: string | null, location_info?: string | null, status?: string | null, destinations: Array<{ __typename?: 'Destination', id: string, name?: string | null, hover_description?: string | null, photo: Array<{ __typename?: 'DestinationImage', id: string, image?: { __typename?: 'CloudinaryImage_File', publicUrlTransformed?: string | null } | null }> }> } | null };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1308,9 +1315,11 @@ export const AllGuidesQueryDocument = gql`
     location_info
     status
     destinations {
+      id
       name
       hover_description
       photo {
+        id
         image {
           publicUrlTransformed
         }
@@ -1348,6 +1357,58 @@ export type AllGuidesQueryLazyQueryHookResult = ReturnType<typeof useAllGuidesQu
 export type AllGuidesQueryQueryResult = Apollo.QueryResult<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>;
 export function refetchAllGuidesQueryQuery(variables?: AllGuidesQueryQueryVariables) {
       return { query: AllGuidesQueryDocument, variables: variables }
+    }
+export const GetGuideDocument = gql`
+    query getGuide($id: ID!) {
+  Guide(where: {id: $id}) {
+    id
+    name
+    location_info
+    status
+    destinations {
+      id
+      name
+      hover_description
+      photo {
+        id
+        image {
+          publicUrlTransformed
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetGuideQuery__
+ *
+ * To run a query within a React component, call `useGetGuideQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGuideQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGuideQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetGuideQuery(baseOptions: Apollo.QueryHookOptions<GetGuideQuery, GetGuideQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetGuideQuery, GetGuideQueryVariables>(GetGuideDocument, options);
+      }
+export function useGetGuideLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGuideQuery, GetGuideQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetGuideQuery, GetGuideQueryVariables>(GetGuideDocument, options);
+        }
+export type GetGuideQueryHookResult = ReturnType<typeof useGetGuideQuery>;
+export type GetGuideLazyQueryHookResult = ReturnType<typeof useGetGuideLazyQuery>;
+export type GetGuideQueryResult = Apollo.QueryResult<GetGuideQuery, GetGuideQueryVariables>;
+export function refetchGetGuideQuery(variables: GetGuideQueryVariables) {
+      return { query: GetGuideDocument, variables: variables }
     }
 export const UserDocument = gql`
     query User {

@@ -25,6 +25,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/guide/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/guide/[id].js"
+    ],
     "/guides": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
