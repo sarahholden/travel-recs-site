@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { HTMLInputTypeAttribute, useState } from "react"
 
 type GuideInputsType = {
   name?: string;
   location_info?: string;
+  image?: File;
+  altText?: string;
 }
 
 type ElementPropsType = {
   name: string;
-  type: string;
+  type: HTMLInputTypeAttribute;
   value: string | number | File
 }
 

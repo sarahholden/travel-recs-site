@@ -1,0 +1,11 @@
+mutation createGuide($name: String!, $location_info: String!) {
+  createGuide(
+    data: {
+      name: $name
+      location_info: $location_info
+    }
+  ) {
+    id
+    name
+  }
+}

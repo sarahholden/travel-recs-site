@@ -1,1 +1,1 @@
-import * as Types from '../types/types';
+import * as Types from "../types/types";
