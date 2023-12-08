@@ -15,7 +15,7 @@ export default function SignIn() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // TODO - add errors inline
+    // TODO - add errors to form fields
     if (!inputs.email || !inputs.password) return;
 
     const res = await signInMutation({
@@ -47,7 +47,7 @@ export default function SignIn() {
             Email Address
           </label>
           <input 
-            type="text"
+            type="email"
             id="email"
             name="email"
             placeholder="Enter Your Email"
