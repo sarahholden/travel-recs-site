@@ -22,24 +22,21 @@ export default function SignIn() {
     e.preventDefault();
     const res = await signInMutation()
     resetForm()
-    
+
     if (res?.data?.authenticateUserWithPassword?.__typename === 'UserAuthenticationWithPasswordSuccess' && res.data.authenticateUserWithPassword.item?.id) {
       Router.push({
         pathname: `/account`,
       })
     }
-
-
   }
 
   const error =
   data?.authenticateUserWithPassword.__typename === 'UserAuthenticationWithPasswordFailure' &&
   data.authenticateUserWithPassword;
-
   
   return (
     <Form onSubmit={handleSubmit}>
-      {error && <DisplayError error={error}/>}
+      {error && <DisplayError error={error} />}
       <fieldset disabled={loading} aria-busy={loading}>
         <div>
           <label htmlFor="email">
