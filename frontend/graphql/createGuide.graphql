@@ -1,11 +1,14 @@
-mutation createGuide($name: String!, $location_info: String!) {
+mutation createGuide($name: String!, $location_info: String, $altText: String, $image: Upload) {
   createGuide(
     data: {
       name: $name
       location_info: $location_info
+      altText: $altText
+      image: $image
     }
   ) {
     id
     name
+
   }
 }

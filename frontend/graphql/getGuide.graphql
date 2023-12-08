@@ -4,6 +4,10 @@ query getGuide($id: ID!) {
     name
     location_info
     status
+    image {
+      publicUrlTransformed
+    }
+    altText
     destinations {
       id
       name

@@ -5,14 +5,20 @@ export default function SingleGuide({id}: {id: string }) {
     variables: { id },
   });
 
-  console.log(data)
+  if (!data || error ) return <div>Error loading page</div>
+  if ( loading ) return <div>Loading...</div>
+  
+  const {Guide} = data;
 
   return (
-    data?.Guide ? (
+    Guide ? (
       <div>
-        {data.Guide.name}
-        {data.Guide.location_info}
-        {data.Guide.destinations?.map(destination => destination.name)}
+        {Guide.name}
+        {Guide.location_info}
+        {Guide.destinations?.map(destination => destination.name)}
+        {Guide.image?.publicUrlTransformed && (
+          <img src={Guide.image.publicUrlTransformed} alt={Guide.altText ?? `Image of ${Guide.name}`} />
+        )}
       </div>
     ) : null
 

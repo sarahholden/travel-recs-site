@@ -1318,7 +1318,9 @@ export type AllGuidesQueryQuery = {
 
 export type CreateGuideMutationVariables = Exact<{
   name: Scalars["String"];
-  location_info: Scalars["String"];
+  location_info?: InputMaybe<Scalars["String"]>;
+  altText?: InputMaybe<Scalars["String"]>;
+  image?: InputMaybe<Scalars["Upload"]>;
 }>;
 
 export type CreateGuideMutation = {
@@ -1342,6 +1344,11 @@ export type GetGuideQuery = {
     name?: string | null;
     location_info?: string | null;
     status?: string | null;
+    altText?: string | null;
+    image?: {
+      __typename?: "CloudinaryImage_File";
+      publicUrlTransformed?: string | null;
+    } | null;
     destinations: Array<{
       __typename?: "Destination";
       id: string;
@@ -1370,6 +1377,30 @@ export type UserQuery = {
     email?: string | null;
   } | null;
 };
+
+export type SignInMutationVariables = Exact<{
+  email: Scalars["String"];
+  password: Scalars["String"];
+}>;
+
+export type SignInMutation = {
+  __typename?: "Mutation";
+  authenticateUserWithPassword:
+    | { __typename?: "UserAuthenticationWithPasswordFailure"; message: string }
+    | {
+        __typename?: "UserAuthenticationWithPasswordSuccess";
+        item: {
+          __typename?: "User";
+          id: string;
+          email?: string | null;
+          name?: string | null;
+        };
+      };
+};
+
+export type SignOutMutationVariables = Exact<{ [key: string]: never }>;
+
+export type SignOutMutation = { __typename?: "Mutation"; endSession: boolean };
 
 export const AllGuidesQueryDocument = gql`
   query allGuidesQuery {
@@ -1448,8 +1479,20 @@ export function refetchAllGuidesQueryQuery(
   return { query: AllGuidesQueryDocument, variables: variables };
 }
 export const CreateGuideDocument = gql`
-  mutation createGuide($name: String!, $location_info: String!) {
-    createGuide(data: { name: $name, location_info: $location_info }) {
+  mutation createGuide(
+    $name: String!
+    $location_info: String
+    $altText: String
+    $image: Upload
+  ) {
+    createGuide(
+      data: {
+        name: $name
+        location_info: $location_info
+        altText: $altText
+        image: $image
+      }
+    ) {
       id
       name
     }
@@ -1475,6 +1518,8 @@ export type CreateGuideMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      name: // value for 'name'
  *      location_info: // value for 'location_info'
+ *      altText: // value for 'altText'
+ *      image: // value for 'image'
  *   },
  * });
  */
@@ -1506,6 +1551,10 @@ export const GetGuideDocument = gql`
       name
       location_info
       status
+      image {
+        publicUrlTransformed
+      }
+      altText
       destinations {
         id
         name
@@ -1617,6 +1666,107 @@ export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
 export function refetchUserQuery(variables?: UserQueryVariables) {
   return { query: UserDocument, variables: variables };
 }
+export const SignInDocument = gql`
+  mutation signIn($email: String!, $password: String!) {
+    authenticateUserWithPassword(email: $email, password: $password) {
+      ... on UserAuthenticationWithPasswordSuccess {
+        item {
+          id
+          email
+          name
+        }
+      }
+      ... on UserAuthenticationWithPasswordFailure {
+        message
+      }
+    }
+  }
+`;
+export type SignInMutationFn = Apollo.MutationFunction<
+  SignInMutation,
+  SignInMutationVariables
+>;
+
+/**
+ * __useSignInMutation__
+ *
+ * To run a mutation, you first call `useSignInMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignInMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signInMutation, { data, loading, error }] = useSignInMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useSignInMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SignInMutation,
+    SignInMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<SignInMutation, SignInMutationVariables>(
+    SignInDocument,
+    options,
+  );
+}
+export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
+export type SignInMutationResult = Apollo.MutationResult<SignInMutation>;
+export type SignInMutationOptions = Apollo.BaseMutationOptions<
+  SignInMutation,
+  SignInMutationVariables
+>;
+export const SignOutDocument = gql`
+  mutation signOut {
+    endSession
+  }
+`;
+export type SignOutMutationFn = Apollo.MutationFunction<
+  SignOutMutation,
+  SignOutMutationVariables
+>;
+
+/**
+ * __useSignOutMutation__
+ *
+ * To run a mutation, you first call `useSignOutMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignOutMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signOutMutation, { data, loading, error }] = useSignOutMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSignOutMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SignOutMutation,
+    SignOutMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<SignOutMutation, SignOutMutationVariables>(
+    SignOutDocument,
+    options,
+  );
+}
+export type SignOutMutationHookResult = ReturnType<typeof useSignOutMutation>;
+export type SignOutMutationResult = Apollo.MutationResult<SignOutMutation>;
+export type SignOutMutationOptions = Apollo.BaseMutationOptions<
+  SignOutMutation,
+  SignOutMutationVariables
+>;
 export type CloudinaryImage_FileKeySpecifier = (
   | "encoding"
   | "filename"

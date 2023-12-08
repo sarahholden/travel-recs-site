@@ -6,6 +6,7 @@ type GuideProps = { guide: guideType };
 export default function Guide({ guide }: GuideProps) {
   return (
     <div>
+        
       <h2>
         <Link href={`/guide/${guide.id}`}>{guide.name}</Link>
         </h2>
@@ -13,6 +14,11 @@ export default function Guide({ guide }: GuideProps) {
         <p>
           {guide.location_info}
         </p>
+      )}
+
+      {/* TODO: What is the cleanest way to write this?  */}
+      {guide?.image?.publicUrlTransformed && (
+        <img src={guide.image.publicUrlTransformed} alt="asdf" />
       )}
     </div>
   )

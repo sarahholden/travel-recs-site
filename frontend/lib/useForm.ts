@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, useState } from "react"
+import { HTMLInputTypeAttribute, useEffect, useState } from "react"
 
 type GuideInputsType = {
   name?: string;
@@ -7,14 +7,28 @@ type GuideInputsType = {
   altText?: string;
 }
 
+type UserInputsType = {
+  name?: string;
+  email?: string;
+  password?: string;
+  token?: string;
+}
+
 type ElementPropsType = {
   name: string;
   type: HTMLInputTypeAttribute;
   value: string | number | File
 }
 
-export default function useForm(initial: GuideInputsType = {}) {
+type FormInputsTypes = GuideInputsType & UserInputsType;
+
+export default function useForm(initial: FormInputsTypes = {}) {
   const [inputs, setInputs] = useState(initial)
+  const initialValues = Object.values(initial).join('')
+
+  useEffect(() => {
+    setInputs(initial)
+  }, [initialValues])
 
   
   function handleChange(e: React.ChangeEvent<HTMLInputElement> & React.ChangeEvent<HTMLTextAreaElement>) {

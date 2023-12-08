@@ -8,15 +8,14 @@ import DisplayError from './ErrorMessage';
 
 
 export default function CreateGuide() {
-  const {inputs, handleChange, resetForm, clearForm} = useForm({
-    name: '',
-    location_info: '',
-  });
+  const {inputs, handleChange, resetForm, clearForm} = useForm();
 
   const [createGuideMutation, { data, error, loading }] = useCreateGuideMutation({
     variables: {
       name: inputs.name,
       location_info: inputs.location_info,
+      image: inputs.image,
+      altText: inputs.altText
     },
     refetchQueries: [refetchAllGuidesQueryQuery()],
   })
@@ -40,7 +39,7 @@ export default function CreateGuide() {
   return (
     <div>
       <Form action="" onSubmit={handleSubmit}>
-        <DisplayError error={error} />
+        {error && <DisplayError error={error} />}
         <fieldset disabled={loading} aria-busy={loading}>
           <div>
             <label htmlFor="name">
@@ -52,6 +51,7 @@ export default function CreateGuide() {
               name="name"
               placeholder="City Name"
               value={inputs.name}
+              required
               onChange={handleChange} />
           </div>
           <div>
