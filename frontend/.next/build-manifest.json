@@ -15,6 +15,11 @@
     "static/development/_middlewareManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -25,25 +30,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/account": [
+    "/guide/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/account.js"
-    ],
-    "/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/create.js"
+      "static/chunks/pages/guide/[id].js"
     ],
     "/guides": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/guides.js"
     ],
-    "/reset": [
+    "/requestreset": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/reset.js"
+      "static/chunks/pages/requestreset.js"
     ]
   },
   "ampFirstPages": []
