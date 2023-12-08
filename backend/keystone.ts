@@ -9,6 +9,7 @@ import { User } from './schemas/User';
 import { Guide } from './schemas/Guide';
 import { DestinationImage } from './schemas/DestinationImage';
 import { Destination } from './schemas/Destination';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/travel-buddy';
@@ -25,6 +26,12 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ['name', 'email', 'password'],
     // Add roles in here
+  },
+  passwordResetLink: {
+    async sendToken(args) {
+      console.log(args);
+      await sendPasswordResetEmail(args.token, args.identity);
+    },
   },
 });
 

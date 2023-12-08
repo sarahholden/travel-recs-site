@@ -647,6 +647,8 @@ export type Mutation = {
   /**  Delete multiple User items by ID.  */
   deleteUsers?: Maybe<Array<Maybe<User>>>;
   endSession: Scalars["Boolean"];
+  redeemUserPasswordResetToken?: Maybe<RedeemUserPasswordResetTokenResult>;
+  sendUserPasswordResetLink?: Maybe<SendUserPasswordResetLinkResult>;
   /**  Update a single Destination item by ID.  */
   updateDestination?: Maybe<Destination>;
   /**  Update a single DestinationImage item by ID.  */
@@ -738,6 +740,16 @@ export type MutationDeleteUsersArgs = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
+export type MutationRedeemUserPasswordResetTokenArgs = {
+  email: Scalars["String"];
+  password: Scalars["String"];
+  token: Scalars["String"];
+};
+
+export type MutationSendUserPasswordResetLinkArgs = {
+  email: Scalars["String"];
+};
+
 export type MutationUpdateDestinationArgs = {
   data?: InputMaybe<DestinationUpdateInput>;
   id: Scalars["ID"];
@@ -782,6 +794,21 @@ export enum PasswordAuthErrorCode {
   SecretNotSet = "SECRET_NOT_SET",
 }
 
+export enum PasswordResetRedemptionErrorCode {
+  Failure = "FAILURE",
+  IdentityNotFound = "IDENTITY_NOT_FOUND",
+  MultipleIdentityMatches = "MULTIPLE_IDENTITY_MATCHES",
+  TokenExpired = "TOKEN_EXPIRED",
+  TokenMismatch = "TOKEN_MISMATCH",
+  TokenNotSet = "TOKEN_NOT_SET",
+  TokenRedeemed = "TOKEN_REDEEMED",
+}
+
+export enum PasswordResetRequestErrorCode {
+  IdentityNotFound = "IDENTITY_NOT_FOUND",
+  MultipleIdentityMatches = "MULTIPLE_IDENTITY_MATCHES",
+}
+
 export type Query = {
   __typename?: "Query";
   /**  Search for the Destination item with the matching ID.  */
@@ -822,6 +849,7 @@ export type Query = {
   appVersion?: Maybe<Scalars["String"]>;
   authenticatedItem?: Maybe<AuthenticatedItem>;
   keystone: KeystoneMeta;
+  validateUserPasswordResetToken?: Maybe<ValidateUserPasswordResetTokenResult>;
 };
 
 export type QueryDestinationArgs = {
@@ -914,6 +942,23 @@ export type QueryAllUsersArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortUsersBy>>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+export type QueryValidateUserPasswordResetTokenArgs = {
+  email: Scalars["String"];
+  token: Scalars["String"];
+};
+
+export type RedeemUserPasswordResetTokenResult = {
+  __typename?: "RedeemUserPasswordResetTokenResult";
+  code: PasswordResetRedemptionErrorCode;
+  message: Scalars["String"];
+};
+
+export type SendUserPasswordResetLinkResult = {
+  __typename?: "SendUserPasswordResetLinkResult";
+  code: PasswordResetRequestErrorCode;
+  message: Scalars["String"];
 };
 
 export enum SortDestinationImagesBy {
@@ -1126,6 +1171,12 @@ export type UsersCreateInput = {
 export type UsersUpdateInput = {
   data?: InputMaybe<UserUpdateInput>;
   id: Scalars["ID"];
+};
+
+export type ValidateUserPasswordResetTokenResult = {
+  __typename?: "ValidateUserPasswordResetTokenResult";
+  code: PasswordResetRedemptionErrorCode;
+  message: Scalars["String"];
 };
 
 export type _ListAccess = {
@@ -1375,6 +1426,34 @@ export type UserQuery = {
     id: string;
     name?: string | null;
     email?: string | null;
+  } | null;
+};
+
+export type RequestResetMutationVariables = Exact<{
+  email: Scalars["String"];
+}>;
+
+export type RequestResetMutation = {
+  __typename?: "Mutation";
+  sendUserPasswordResetLink?: {
+    __typename?: "SendUserPasswordResetLinkResult";
+    code: PasswordResetRequestErrorCode;
+    message: string;
+  } | null;
+};
+
+export type ResetPasswordMutationVariables = Exact<{
+  email: Scalars["String"];
+  token: Scalars["String"];
+  password: Scalars["String"];
+}>;
+
+export type ResetPasswordMutation = {
+  __typename?: "Mutation";
+  redeemUserPasswordResetToken?: {
+    __typename?: "RedeemUserPasswordResetTokenResult";
+    code: PasswordResetRedemptionErrorCode;
+    message: string;
   } | null;
 };
 
@@ -1686,6 +1765,114 @@ export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
 export function refetchUserQuery(variables?: UserQueryVariables) {
   return { query: UserDocument, variables: variables };
 }
+export const RequestResetDocument = gql`
+  mutation requestReset($email: String!) {
+    sendUserPasswordResetLink(email: $email) {
+      code
+      message
+    }
+  }
+`;
+export type RequestResetMutationFn = Apollo.MutationFunction<
+  RequestResetMutation,
+  RequestResetMutationVariables
+>;
+
+/**
+ * __useRequestResetMutation__
+ *
+ * To run a mutation, you first call `useRequestResetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRequestResetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [requestResetMutation, { data, loading, error }] = useRequestResetMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useRequestResetMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RequestResetMutation,
+    RequestResetMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RequestResetMutation,
+    RequestResetMutationVariables
+  >(RequestResetDocument, options);
+}
+export type RequestResetMutationHookResult = ReturnType<
+  typeof useRequestResetMutation
+>;
+export type RequestResetMutationResult =
+  Apollo.MutationResult<RequestResetMutation>;
+export type RequestResetMutationOptions = Apollo.BaseMutationOptions<
+  RequestResetMutation,
+  RequestResetMutationVariables
+>;
+export const ResetPasswordDocument = gql`
+  mutation resetPassword($email: String!, $token: String!, $password: String!) {
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
+      code
+      message
+    }
+  }
+`;
+export type ResetPasswordMutationFn = Apollo.MutationFunction<
+  ResetPasswordMutation,
+  ResetPasswordMutationVariables
+>;
+
+/**
+ * __useResetPasswordMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordMutation, { data, loading, error }] = useResetPasswordMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      token: // value for 'token'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useResetPasswordMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    ResetPasswordMutation,
+    ResetPasswordMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    ResetPasswordMutation,
+    ResetPasswordMutationVariables
+  >(ResetPasswordDocument, options);
+}
+export type ResetPasswordMutationHookResult = ReturnType<
+  typeof useResetPasswordMutation
+>;
+export type ResetPasswordMutationResult =
+  Apollo.MutationResult<ResetPasswordMutation>;
+export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<
+  ResetPasswordMutation,
+  ResetPasswordMutationVariables
+>;
 export const SignInDocument = gql`
   mutation signIn($email: String!, $password: String!) {
     authenticateUserWithPassword(email: $email, password: $password) {
@@ -2047,6 +2234,8 @@ export type MutationKeySpecifier = (
   | "deleteUser"
   | "deleteUsers"
   | "endSession"
+  | "redeemUserPasswordResetToken"
+  | "sendUserPasswordResetLink"
   | "updateDestination"
   | "updateDestinationImage"
   | "updateDestinationImages"
@@ -2077,6 +2266,8 @@ export type MutationFieldPolicy = {
   deleteUser?: FieldPolicy<any> | FieldReadFunction<any>;
   deleteUsers?: FieldPolicy<any> | FieldReadFunction<any>;
   endSession?: FieldPolicy<any> | FieldReadFunction<any>;
+  redeemUserPasswordResetToken?: FieldPolicy<any> | FieldReadFunction<any>;
+  sendUserPasswordResetLink?: FieldPolicy<any> | FieldReadFunction<any>;
   updateDestination?: FieldPolicy<any> | FieldReadFunction<any>;
   updateDestinationImage?: FieldPolicy<any> | FieldReadFunction<any>;
   updateDestinationImages?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -2107,6 +2298,7 @@ export type QueryKeySpecifier = (
   | "appVersion"
   | "authenticatedItem"
   | "keystone"
+  | "validateUserPasswordResetToken"
   | QueryKeySpecifier
 )[];
 export type QueryFieldPolicy = {
@@ -2130,6 +2322,25 @@ export type QueryFieldPolicy = {
   appVersion?: FieldPolicy<any> | FieldReadFunction<any>;
   authenticatedItem?: FieldPolicy<any> | FieldReadFunction<any>;
   keystone?: FieldPolicy<any> | FieldReadFunction<any>;
+  validateUserPasswordResetToken?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type RedeemUserPasswordResetTokenResultKeySpecifier = (
+  | "code"
+  | "message"
+  | RedeemUserPasswordResetTokenResultKeySpecifier
+)[];
+export type RedeemUserPasswordResetTokenResultFieldPolicy = {
+  code?: FieldPolicy<any> | FieldReadFunction<any>;
+  message?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type SendUserPasswordResetLinkResultKeySpecifier = (
+  | "code"
+  | "message"
+  | SendUserPasswordResetLinkResultKeySpecifier
+)[];
+export type SendUserPasswordResetLinkResultFieldPolicy = {
+  code?: FieldPolicy<any> | FieldReadFunction<any>;
+  message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type UserKeySpecifier = (
   | "email"
@@ -2173,6 +2384,15 @@ export type UserAuthenticationWithPasswordSuccessKeySpecifier = (
 export type UserAuthenticationWithPasswordSuccessFieldPolicy = {
   item?: FieldPolicy<any> | FieldReadFunction<any>;
   sessionToken?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type ValidateUserPasswordResetTokenResultKeySpecifier = (
+  | "code"
+  | "message"
+  | ValidateUserPasswordResetTokenResultKeySpecifier
+)[];
+export type ValidateUserPasswordResetTokenResultFieldPolicy = {
+  code?: FieldPolicy<any> | FieldReadFunction<any>;
+  message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type _ListAccessKeySpecifier = (
   | "auth"
@@ -2406,6 +2626,23 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | QueryKeySpecifier);
     fields?: QueryFieldPolicy;
   };
+  RedeemUserPasswordResetTokenResult?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
+    keyFields?:
+      | false
+      | RedeemUserPasswordResetTokenResultKeySpecifier
+      | (() => undefined | RedeemUserPasswordResetTokenResultKeySpecifier);
+    fields?: RedeemUserPasswordResetTokenResultFieldPolicy;
+  };
+  SendUserPasswordResetLinkResult?: Omit<TypePolicy, "fields" | "keyFields"> & {
+    keyFields?:
+      | false
+      | SendUserPasswordResetLinkResultKeySpecifier
+      | (() => undefined | SendUserPasswordResetLinkResultKeySpecifier);
+    fields?: SendUserPasswordResetLinkResultFieldPolicy;
+  };
   User?: Omit<TypePolicy, "fields" | "keyFields"> & {
     keyFields?: false | UserKeySpecifier | (() => undefined | UserKeySpecifier);
     fields?: UserFieldPolicy;
@@ -2429,6 +2666,16 @@ export type StrictTypedTypePolicies = {
       | UserAuthenticationWithPasswordSuccessKeySpecifier
       | (() => undefined | UserAuthenticationWithPasswordSuccessKeySpecifier);
     fields?: UserAuthenticationWithPasswordSuccessFieldPolicy;
+  };
+  ValidateUserPasswordResetTokenResult?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
+    keyFields?:
+      | false
+      | ValidateUserPasswordResetTokenResultKeySpecifier
+      | (() => undefined | ValidateUserPasswordResetTokenResultKeySpecifier);
+    fields?: ValidateUserPasswordResetTokenResultFieldPolicy;
   };
   _ListAccess?: Omit<TypePolicy, "fields" | "keyFields"> & {
     keyFields?:

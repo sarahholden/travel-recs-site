@@ -77,7 +77,7 @@ export default function SignIn() {
               <Link href="signup">Sign Up</Link>
             </p>
             <p>
-              <Link href="/passwordreset">Reset Password</Link>
+              <Link href="/requestreset">Reset Password</Link>
             </p>
         
           </div>

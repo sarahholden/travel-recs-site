@@ -638,6 +638,8 @@ export type Mutation = {
   /**  Delete multiple User items by ID.  */
   deleteUsers?: Maybe<Array<Maybe<User>>>;
   endSession: Scalars["Boolean"];
+  redeemUserPasswordResetToken?: Maybe<RedeemUserPasswordResetTokenResult>;
+  sendUserPasswordResetLink?: Maybe<SendUserPasswordResetLinkResult>;
   /**  Update a single Destination item by ID.  */
   updateDestination?: Maybe<Destination>;
   /**  Update a single DestinationImage item by ID.  */
@@ -729,6 +731,16 @@ export type MutationDeleteUsersArgs = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
+export type MutationRedeemUserPasswordResetTokenArgs = {
+  email: Scalars["String"];
+  password: Scalars["String"];
+  token: Scalars["String"];
+};
+
+export type MutationSendUserPasswordResetLinkArgs = {
+  email: Scalars["String"];
+};
+
 export type MutationUpdateDestinationArgs = {
   data?: InputMaybe<DestinationUpdateInput>;
   id: Scalars["ID"];
@@ -773,6 +785,21 @@ export enum PasswordAuthErrorCode {
   SecretNotSet = "SECRET_NOT_SET",
 }
 
+export enum PasswordResetRedemptionErrorCode {
+  Failure = "FAILURE",
+  IdentityNotFound = "IDENTITY_NOT_FOUND",
+  MultipleIdentityMatches = "MULTIPLE_IDENTITY_MATCHES",
+  TokenExpired = "TOKEN_EXPIRED",
+  TokenMismatch = "TOKEN_MISMATCH",
+  TokenNotSet = "TOKEN_NOT_SET",
+  TokenRedeemed = "TOKEN_REDEEMED",
+}
+
+export enum PasswordResetRequestErrorCode {
+  IdentityNotFound = "IDENTITY_NOT_FOUND",
+  MultipleIdentityMatches = "MULTIPLE_IDENTITY_MATCHES",
+}
+
 export type Query = {
   __typename?: "Query";
   /**  Search for the Destination item with the matching ID.  */
@@ -813,6 +840,7 @@ export type Query = {
   appVersion?: Maybe<Scalars["String"]>;
   authenticatedItem?: Maybe<AuthenticatedItem>;
   keystone: KeystoneMeta;
+  validateUserPasswordResetToken?: Maybe<ValidateUserPasswordResetTokenResult>;
 };
 
 export type QueryDestinationArgs = {
@@ -905,6 +933,23 @@ export type QueryAllUsersArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortUsersBy>>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+export type QueryValidateUserPasswordResetTokenArgs = {
+  email: Scalars["String"];
+  token: Scalars["String"];
+};
+
+export type RedeemUserPasswordResetTokenResult = {
+  __typename?: "RedeemUserPasswordResetTokenResult";
+  code: PasswordResetRedemptionErrorCode;
+  message: Scalars["String"];
+};
+
+export type SendUserPasswordResetLinkResult = {
+  __typename?: "SendUserPasswordResetLinkResult";
+  code: PasswordResetRequestErrorCode;
+  message: Scalars["String"];
 };
 
 export enum SortDestinationImagesBy {
@@ -1117,6 +1162,12 @@ export type UsersCreateInput = {
 export type UsersUpdateInput = {
   data?: InputMaybe<UserUpdateInput>;
   id: Scalars["ID"];
+};
+
+export type ValidateUserPasswordResetTokenResult = {
+  __typename?: "ValidateUserPasswordResetTokenResult";
+  code: PasswordResetRedemptionErrorCode;
+  message: Scalars["String"];
 };
 
 export type _ListAccess = {
