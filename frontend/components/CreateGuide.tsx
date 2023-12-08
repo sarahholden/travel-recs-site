@@ -3,12 +3,19 @@ import Router from 'next/router';
 import {Form} from './styles/FormStyles';
 import { useCreateGuideMutation, refetchAllGuidesQueryQuery } from '../types/generated-queries';
 import DisplayError from './ErrorMessage';
+import useUser from '../hooks/User';
+import SignIn from './SignIn';
 
 
 
 
 export default function CreateGuide() {
+  const user = useUser();
   const {inputs, handleChange, resetForm, clearForm} = useForm();
+  
+  if (!user) {
+    return <SignIn />;
+  }
 
   const [createGuideMutation, { data, error, loading }] = useCreateGuideMutation({
     variables: {
@@ -20,7 +27,6 @@ export default function CreateGuide() {
     refetchQueries: [refetchAllGuidesQueryQuery()],
   })
 
-  console.log(createGuideMutation)
 
 
   async function handleSubmit(event: React.FormEvent) {
