@@ -10,17 +10,21 @@ export default function SignIn() {
     password: '',
   });
 
-  const [signInMutation, {data, loading}] = useSignInMutation({
-    variables: {
-      email: inputs.email,
-      password: inputs.password
-    },
-    refetchQueries: [refetchUserQuery()],
-  })
+  const [signInMutation, {data, loading}] = useSignInMutation()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const res = await signInMutation()
+
+    // TODO - add errors inline
+    if (!inputs.email || !inputs.password) return;
+
+    const res = await signInMutation({
+      variables: {
+        email: inputs.email,
+        password: inputs.password
+      },
+      refetchQueries: [refetchUserQuery()],
+    })
     resetForm()
 
     if (res?.data?.authenticateUserWithPassword?.__typename === 'UserAuthenticationWithPasswordSuccess' && res.data.authenticateUserWithPassword.item?.id) {

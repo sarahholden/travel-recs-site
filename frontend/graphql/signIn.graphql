@@ -9,6 +9,7 @@ mutation signIn($email: String!, $password: String!) {
     }
     ... on UserAuthenticationWithPasswordFailure {
       message
+      code
     }
   }
 
