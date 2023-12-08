@@ -3,6 +3,7 @@ import useForm from "../lib/useForm";
 import { refetchUserQuery, useSignInMutation } from "../types/generated-queries";
 import { Form } from "./styles/FormStyles";
 import DisplayError from "./ErrorMessage";
+import Link from "next/link";
 
 export default function SignIn() {
   const {inputs, handleChange, resetForm} = useForm({
@@ -39,37 +40,49 @@ export default function SignIn() {
   data.authenticateUserWithPassword;
   
   return (
-    <Form method="POST" onSubmit={handleSubmit}>
-      {error && <DisplayError error={error} />}
-      <fieldset disabled={loading} aria-busy={loading}>
-        <div>
-          <label htmlFor="email">
-            Email Address
-          </label>
-          <input 
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter Your Email"
-            value={inputs.email}
-            onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password
-          </label>
-          <input 
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter Your password"
-            value={inputs.password}
-            onChange={handleChange} />
-        </div>
-        <div>
-          <button type="submit">Sign In</button>
-        </div>
-      </fieldset>
-    </Form>
+    <>
+      <h2>Sign In</h2>
+      <Form method="POST" onSubmit={handleSubmit}>
+        {error && <DisplayError error={error} />}
+        <fieldset disabled={loading} aria-busy={loading}>
+          <div>
+            <label htmlFor="email">
+              Email Address
+            </label>
+            <input 
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Your Email"
+              value={inputs.email}
+              onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="password">
+              Password
+            </label>
+            <input 
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter Your password"
+              value={inputs.password}
+              onChange={handleChange} />
+          </div>
+          <div>
+            <button type="submit">Sign In</button>
+          </div>
+          <div>
+            <p>
+              <Link href="signup">Sign Up</Link>
+            </p>
+            <p>
+              <Link href="/passwordreset">Reset Password</Link>
+            </p>
+        
+          </div>
+        </fieldset>
+      </Form>
+    </>
   )
 }

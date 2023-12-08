@@ -92,7 +92,10 @@ export default function SignUp() {
                   onChange={handleChange} />
               </div>
               <div>
-                <button type="submit">Sign In</button>
+                <button type="submit">Sign Up</button>
+              </div>
+              <div>
+                Already have an account? <Link href="signin">Sign In</Link>
               </div>
             </fieldset>
           </Form>
