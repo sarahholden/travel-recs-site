@@ -35,7 +35,7 @@ export default function SignIn() {
   data.authenticateUserWithPassword;
   
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form method="POST" onSubmit={handleSubmit}>
       {error && <DisplayError error={error} />}
       <fieldset disabled={loading} aria-busy={loading}>
         <div>
