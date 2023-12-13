@@ -25,7 +25,7 @@ function makeANiceEmail(text: string) {
     ">
       <h2>Hello There!</h2>
       <p>${text}</p>
-      <p>©️, A-J Roos</p>
+      <p>©️, Sarah Holden</p>
     </div>
   `;
 }
@@ -60,9 +60,8 @@ export async function sendPasswordResetEmail(
   if (process.env.MAIL_USER.includes('ethereal.email')) {
     /* eslint no-console: 0 */
     console.log(
-      `📬 Message Sent! Preview it at ${getTestMessageUrl(
-        info as SentMessageInfo
-      )}`
+      '📬 Message Sent! Preview it at',
+      getTestMessageUrl(info as SentMessageInfo)
     );
   }
 }
