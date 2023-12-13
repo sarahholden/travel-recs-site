@@ -1,4 +1,3 @@
-import { FavoritesItem } from './schemas/FavoritesItem';
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import 'dotenv/config';
@@ -10,7 +9,9 @@ import { User } from './schemas/User';
 import { Guide } from './schemas/Guide';
 import { DestinationImage } from './schemas/DestinationImage';
 import { Destination } from './schemas/Destination';
+import { FavoritesItem } from './schemas/FavoritesItem';
 import { sendPasswordResetEmail } from './lib/mail';
+import { extendGraphQlSchema } from './mutations';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/travel-buddy';
@@ -57,6 +58,7 @@ export default withAuth(
       Destination,
       FavoritesItem,
     }),
+    extendGraphqlSchema: extendGraphQlSchema,
     ui: {
       // Change for roles
       isAccessAllowed: ({ session }) =>

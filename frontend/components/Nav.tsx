@@ -1,6 +1,7 @@
 import Link from "next/link";
 import useUser from "../hooks/User";
 import SignOut from "./SignOut";
+import Favorites from "./Favorites";
 
 export default function Nav() {
   const user = useUser();
@@ -12,7 +13,7 @@ export default function Nav() {
           <Link href="/guides">Guides</Link>
         </li>
 
-        { user ? (
+        {user ? (
           <>
             <li>
               <Link href="/create">Create Guide</Link>
@@ -20,18 +21,14 @@ export default function Nav() {
             <li>
               <Link href="/account">Account</Link>
             </li>
-            <SignOut/>
+            <SignOut />
           </>
-        ): (
+        ) : (
           <li>
             <Link href="/signin">Sign In</Link>
           </li>
         )}
-
       </ul>
-      
-      
     </nav>
-
-  )
+  );
 }

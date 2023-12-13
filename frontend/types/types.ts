@@ -344,6 +344,57 @@ export type DestinationsUpdateInput = {
 };
 
 /**  A keystone list  */
+export type FavoritesItem = {
+  __typename?: "FavoritesItem";
+  guide?: Maybe<Guide>;
+  id: Scalars["ID"];
+  user?: Maybe<User>;
+};
+
+export type FavoritesItemCreateInput = {
+  guide?: InputMaybe<GuideRelateToOneInput>;
+  user?: InputMaybe<UserRelateToOneInput>;
+};
+
+export type FavoritesItemRelateToManyInput = {
+  connect?: InputMaybe<Array<InputMaybe<FavoritesItemWhereUniqueInput>>>;
+  create?: InputMaybe<Array<InputMaybe<FavoritesItemCreateInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<FavoritesItemWhereUniqueInput>>>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type FavoritesItemUpdateInput = {
+  guide?: InputMaybe<GuideRelateToOneInput>;
+  user?: InputMaybe<UserRelateToOneInput>;
+};
+
+export type FavoritesItemWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<FavoritesItemWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<FavoritesItemWhereInput>>>;
+  guide?: InputMaybe<GuideWhereInput>;
+  guide_is_null?: InputMaybe<Scalars["Boolean"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  id_not?: InputMaybe<Scalars["ID"]>;
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  user?: InputMaybe<UserWhereInput>;
+  user_is_null?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type FavoritesItemWhereUniqueInput = {
+  id: Scalars["ID"];
+};
+
+export type FavoritesItemsCreateInput = {
+  data?: InputMaybe<FavoritesItemCreateInput>;
+};
+
+export type FavoritesItemsUpdateInput = {
+  data?: InputMaybe<FavoritesItemUpdateInput>;
+  id: Scalars["ID"];
+};
+
+/**  A keystone list  */
 export type Guide = {
   __typename?: "Guide";
   _destinationsMeta?: Maybe<_QueryMeta>;
@@ -612,6 +663,10 @@ export type Mutation = {
   createDestinationImages?: Maybe<Array<Maybe<DestinationImage>>>;
   /**  Create multiple Destination items.  */
   createDestinations?: Maybe<Array<Maybe<Destination>>>;
+  /**  Create a single FavoritesItem item.  */
+  createFavoritesItem?: Maybe<FavoritesItem>;
+  /**  Create multiple FavoritesItem items.  */
+  createFavoritesItems?: Maybe<Array<Maybe<FavoritesItem>>>;
   /**  Create a single Guide item.  */
   createGuide?: Maybe<Guide>;
   /**  Create multiple Guide items.  */
@@ -629,6 +684,10 @@ export type Mutation = {
   deleteDestinationImages?: Maybe<Array<Maybe<DestinationImage>>>;
   /**  Delete multiple Destination items by ID.  */
   deleteDestinations?: Maybe<Array<Maybe<Destination>>>;
+  /**  Delete a single FavoritesItem item by ID.  */
+  deleteFavoritesItem?: Maybe<FavoritesItem>;
+  /**  Delete multiple FavoritesItem items by ID.  */
+  deleteFavoritesItems?: Maybe<Array<Maybe<FavoritesItem>>>;
   /**  Delete a single Guide item by ID.  */
   deleteGuide?: Maybe<Guide>;
   /**  Delete multiple Guide items by ID.  */
@@ -648,6 +707,10 @@ export type Mutation = {
   updateDestinationImages?: Maybe<Array<Maybe<DestinationImage>>>;
   /**  Update multiple Destination items by ID.  */
   updateDestinations?: Maybe<Array<Maybe<Destination>>>;
+  /**  Update a single FavoritesItem item by ID.  */
+  updateFavoritesItem?: Maybe<FavoritesItem>;
+  /**  Update multiple FavoritesItem items by ID.  */
+  updateFavoritesItems?: Maybe<Array<Maybe<FavoritesItem>>>;
   /**  Update a single Guide item by ID.  */
   updateGuide?: Maybe<Guide>;
   /**  Update multiple Guide items by ID.  */
@@ -677,6 +740,14 @@ export type MutationCreateDestinationImagesArgs = {
 
 export type MutationCreateDestinationsArgs = {
   data?: InputMaybe<Array<InputMaybe<DestinationsCreateInput>>>;
+};
+
+export type MutationCreateFavoritesItemArgs = {
+  data?: InputMaybe<FavoritesItemCreateInput>;
+};
+
+export type MutationCreateFavoritesItemsArgs = {
+  data?: InputMaybe<Array<InputMaybe<FavoritesItemsCreateInput>>>;
 };
 
 export type MutationCreateGuideArgs = {
@@ -712,6 +783,14 @@ export type MutationDeleteDestinationImagesArgs = {
 };
 
 export type MutationDeleteDestinationsArgs = {
+  ids?: InputMaybe<Array<Scalars["ID"]>>;
+};
+
+export type MutationDeleteFavoritesItemArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteFavoritesItemsArgs = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
@@ -757,6 +836,15 @@ export type MutationUpdateDestinationImagesArgs = {
 
 export type MutationUpdateDestinationsArgs = {
   data?: InputMaybe<Array<InputMaybe<DestinationsUpdateInput>>>;
+};
+
+export type MutationUpdateFavoritesItemArgs = {
+  data?: InputMaybe<FavoritesItemUpdateInput>;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateFavoritesItemsArgs = {
+  data?: InputMaybe<Array<InputMaybe<FavoritesItemsUpdateInput>>>;
 };
 
 export type MutationUpdateGuideArgs = {
@@ -806,6 +894,8 @@ export type Query = {
   Destination?: Maybe<Destination>;
   /**  Search for the DestinationImage item with the matching ID.  */
   DestinationImage?: Maybe<DestinationImage>;
+  /**  Search for the FavoritesItem item with the matching ID.  */
+  FavoritesItem?: Maybe<FavoritesItem>;
   /**  Search for the Guide item with the matching ID.  */
   Guide?: Maybe<Guide>;
   /**  Search for the User item with the matching ID.  */
@@ -814,6 +904,8 @@ export type Query = {
   _DestinationImagesMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the Destination list.  */
   _DestinationsMeta?: Maybe<_ListMeta>;
+  /**  Retrieve the meta-data for the FavoritesItem list.  */
+  _FavoritesItemsMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the Guide list.  */
   _GuidesMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the User list.  */
@@ -822,6 +914,8 @@ export type Query = {
   _allDestinationImagesMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all Destination items which match the where clause.  */
   _allDestinationsMeta?: Maybe<_QueryMeta>;
+  /**  Perform a meta-query on all FavoritesItem items which match the where clause.  */
+  _allFavoritesItemsMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all Guide items which match the where clause.  */
   _allGuidesMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all User items which match the where clause.  */
@@ -832,6 +926,8 @@ export type Query = {
   allDestinationImages?: Maybe<Array<Maybe<DestinationImage>>>;
   /**  Search for all Destination items which match the where clause.  */
   allDestinations?: Maybe<Array<Maybe<Destination>>>;
+  /**  Search for all FavoritesItem items which match the where clause.  */
+  allFavoritesItems?: Maybe<Array<Maybe<FavoritesItem>>>;
   /**  Search for all Guide items which match the where clause.  */
   allGuides?: Maybe<Array<Maybe<Guide>>>;
   /**  Search for all User items which match the where clause.  */
@@ -849,6 +945,10 @@ export type QueryDestinationArgs = {
 
 export type QueryDestinationImageArgs = {
   where: DestinationImageWhereUniqueInput;
+};
+
+export type QueryFavoritesItemArgs = {
+  where: FavoritesItemWhereUniqueInput;
 };
 
 export type QueryGuideArgs = {
@@ -875,6 +975,15 @@ export type Query_AllDestinationsMetaArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortDestinationsBy>>;
   where?: InputMaybe<DestinationWhereInput>;
+};
+
+export type Query_AllFavoritesItemsMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortFavoritesItemsBy>>;
+  where?: InputMaybe<FavoritesItemWhereInput>;
 };
 
 export type Query_AllGuidesMetaArgs = {
@@ -915,6 +1024,15 @@ export type QueryAllDestinationsArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortDestinationsBy>>;
   where?: InputMaybe<DestinationWhereInput>;
+};
+
+export type QueryAllFavoritesItemsArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortFavoritesItemsBy>>;
+  where?: InputMaybe<FavoritesItemWhereInput>;
 };
 
 export type QueryAllGuidesArgs = {
@@ -980,6 +1098,15 @@ export enum SortDestinationsBy {
   WebsiteDesc = "website_DESC",
 }
 
+export enum SortFavoritesItemsBy {
+  GuideAsc = "guide_ASC",
+  GuideDesc = "guide_DESC",
+  IdAsc = "id_ASC",
+  IdDesc = "id_DESC",
+  UserAsc = "user_ASC",
+  UserDesc = "user_DESC",
+}
+
 export enum SortGuidesBy {
   AltTextAsc = "altText_ASC",
   AltTextDesc = "altText_DESC",
@@ -998,6 +1125,8 @@ export enum SortGuidesBy {
 export enum SortUsersBy {
   EmailAsc = "email_ASC",
   EmailDesc = "email_DESC",
+  FavoritesAsc = "favorites_ASC",
+  FavoritesDesc = "favorites_DESC",
   IdAsc = "id_ASC",
   IdDesc = "id_DESC",
   MagicAuthIssuedAtAsc = "magicAuthIssuedAt_ASC",
@@ -1015,7 +1144,9 @@ export enum SortUsersBy {
 /**  A keystone list  */
 export type User = {
   __typename?: "User";
+  _favoritesMeta?: Maybe<_QueryMeta>;
   email?: Maybe<Scalars["String"]>;
+  favorites: Array<FavoritesItem>;
   id: Scalars["ID"];
   magicAuthIssuedAt?: Maybe<Scalars["String"]>;
   magicAuthRedeemedAt?: Maybe<Scalars["String"]>;
@@ -1025,6 +1156,26 @@ export type User = {
   passwordResetRedeemedAt?: Maybe<Scalars["String"]>;
   passwordResetToken_is_set?: Maybe<Scalars["Boolean"]>;
   password_is_set?: Maybe<Scalars["Boolean"]>;
+};
+
+/**  A keystone list  */
+export type User_FavoritesMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortFavoritesItemsBy>>;
+  where?: InputMaybe<FavoritesItemWhereInput>;
+};
+
+/**  A keystone list  */
+export type UserFavoritesArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortFavoritesItemsBy>>;
+  where?: InputMaybe<FavoritesItemWhereInput>;
 };
 
 export type UserAuthenticationWithPasswordFailure = {
@@ -1045,6 +1196,7 @@ export type UserAuthenticationWithPasswordSuccess = {
 
 export type UserCreateInput = {
   email?: InputMaybe<Scalars["String"]>;
+  favorites?: InputMaybe<FavoritesItemRelateToManyInput>;
   magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
   magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
   magicAuthToken?: InputMaybe<Scalars["String"]>;
@@ -1055,8 +1207,16 @@ export type UserCreateInput = {
   passwordResetToken?: InputMaybe<Scalars["String"]>;
 };
 
+export type UserRelateToOneInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  create?: InputMaybe<UserCreateInput>;
+  disconnect?: InputMaybe<UserWhereUniqueInput>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+};
+
 export type UserUpdateInput = {
   email?: InputMaybe<Scalars["String"]>;
+  favorites?: InputMaybe<FavoritesItemRelateToManyInput>;
   magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
   magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
   magicAuthToken?: InputMaybe<Scalars["String"]>;
@@ -1088,6 +1248,12 @@ export type UserWhereInput = {
   email_not_starts_with_i?: InputMaybe<Scalars["String"]>;
   email_starts_with?: InputMaybe<Scalars["String"]>;
   email_starts_with_i?: InputMaybe<Scalars["String"]>;
+  /**  condition must be true for all nodes  */
+  favorites_every?: InputMaybe<FavoritesItemWhereInput>;
+  /**  condition must be false for all nodes  */
+  favorites_none?: InputMaybe<FavoritesItemWhereInput>;
+  /**  condition must be true for at least 1 node  */
+  favorites_some?: InputMaybe<FavoritesItemWhereInput>;
   id?: InputMaybe<Scalars["ID"]>;
   id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   id_not?: InputMaybe<Scalars["ID"]>;

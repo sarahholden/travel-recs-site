@@ -1,0 +1,22 @@
+query getFavorites($userId: ID!) {
+  allFavoritesItems(where: { user: { id: $userId } }) {
+    id
+    guide {
+      id
+      name
+      location_info
+      status
+      destinations {
+        id
+        name
+        hover_description
+        photo {
+          id
+          image {
+            publicUrlTransformed
+          }
+        }
+      }
+    }
+  }
+}

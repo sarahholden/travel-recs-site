@@ -1,5 +1,5 @@
 import { list } from '@keystone-next/keystone/schema';
-import { text, relationship, select } from '@keystone-next/fields';
+import { relationship } from '@keystone-next/fields';
 
 export const FavoritesItem = list({
   ui: {
