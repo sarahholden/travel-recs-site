@@ -663,6 +663,7 @@ export type KeystoneMeta = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  addToFavorites?: Maybe<FavoritesItem>;
   authenticateUserWithPassword: UserAuthenticationWithPasswordResult;
   /**  Create a single Destination item.  */
   createDestination?: Maybe<Destination>;
@@ -728,6 +729,10 @@ export type Mutation = {
   updateUser?: Maybe<User>;
   /**  Update multiple User items by ID.  */
   updateUsers?: Maybe<Array<Maybe<User>>>;
+};
+
+export type MutationAddToFavoritesArgs = {
+  guideID?: InputMaybe<Scalars["ID"]>;
 };
 
 export type MutationAuthenticateUserWithPasswordArgs = {
@@ -1516,6 +1521,10 @@ export type AllGuidesQueryQuery = {
     name?: string | null;
     location_info?: string | null;
     status?: string | null;
+    image?: {
+      __typename?: "CloudinaryImage_File";
+      publicUrlTransformed?: string | null;
+    } | null;
     destinations: Array<{
       __typename?: "Destination";
       id: string;
@@ -1707,6 +1716,9 @@ export const AllGuidesQueryDocument = gql`
       name
       location_info
       status
+      image {
+        publicUrlTransformed
+      }
       destinations {
         id
         name
@@ -2505,6 +2517,7 @@ export type KeystoneMetaFieldPolicy = {
   adminMeta?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type MutationKeySpecifier = (
+  | "addToFavorites"
   | "authenticateUserWithPassword"
   | "createDestination"
   | "createDestinationImage"
@@ -2543,6 +2556,7 @@ export type MutationKeySpecifier = (
   | MutationKeySpecifier
 )[];
 export type MutationFieldPolicy = {
+  addToFavorites?: FieldPolicy<any> | FieldReadFunction<any>;
   authenticateUserWithPassword?: FieldPolicy<any> | FieldReadFunction<any>;
   createDestination?: FieldPolicy<any> | FieldReadFunction<any>;
   createDestinationImage?: FieldPolicy<any> | FieldReadFunction<any>;

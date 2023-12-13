@@ -1,4 +1,10 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
@@ -9,18 +15,14 @@ class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         renderPage({
-          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        styles: [initialProps.styles, sheet.getStyleElement()],
       };
     } finally {
       sheet.seal();
@@ -30,7 +32,12 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en-ZA">
-        <Head />
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://use.typekit.net/vqh3apc.css"
+          ></link>
+        </Head>
         <body>
           <Main />
           <NextScript />

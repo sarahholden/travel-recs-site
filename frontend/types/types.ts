@@ -654,6 +654,7 @@ export type KeystoneMeta = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  addToFavorites?: Maybe<FavoritesItem>;
   authenticateUserWithPassword: UserAuthenticationWithPasswordResult;
   /**  Create a single Destination item.  */
   createDestination?: Maybe<Destination>;
@@ -719,6 +720,10 @@ export type Mutation = {
   updateUser?: Maybe<User>;
   /**  Update multiple User items by ID.  */
   updateUsers?: Maybe<Array<Maybe<User>>>;
+};
+
+export type MutationAddToFavoritesArgs = {
+  guideID?: InputMaybe<Scalars["ID"]>;
 };
 
 export type MutationAuthenticateUserWithPasswordArgs = {

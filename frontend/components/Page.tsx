@@ -1,23 +1,17 @@
-import { ReactNode } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import Header from './Header';
+import { ReactNode } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import Header from "./Header";
 
 type PageProps = {
   children: ReactNode;
 };
 
 const GlobalStyles = createGlobalStyle`
-  @font-face {
-    font-family: sans-serif;
-    src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
 
   html {
     --black: #393939;
     box-sizing: border-box;
-    font-size: 62.5%;
+    font-size: .69vw;
   }
 
   *,
@@ -27,11 +21,15 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'radnika_next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: sans-serif;
+    font-family: "area-normal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     padding: 0;
     margin: 0;
     font-size: 1.5rem;
-    line-height: 2;
+    line-height: 1.2;
+    background-color: #FEFAEF;
   }
 
   a {
@@ -43,22 +41,39 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: underline;
   }
 
+  img {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
+
+  main {
+    padding-top: 8rem;
+  }
+
 `;
 
 const PageWrapperStyles = styled.div`
   padding-left: 7rem;
   padding-right: 7rem;
-`
+`;
 
-export default function Page({children}: PageProps) {
+export default function Page({ children }: PageProps) {
   return (
     <div>
-      <GlobalStyles/>
+      <GlobalStyles />
 
       <PageWrapperStyles>
-        <Header/>
-        {children}
+        <Header />
+        <main>{children}</main>
       </PageWrapperStyles>
     </div>
-  )
+  );
 }

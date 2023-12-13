@@ -4,6 +4,9 @@ query allGuidesQuery {
     name
     location_info
     status
+    image {
+      publicUrlTransformed
+    }
     destinations {
       id
       name
@@ -17,7 +20,6 @@ query allGuidesQuery {
     }
   }
 }
-
 
 # export type DestinationImage = {
 #   __typename?: 'DestinationImage';
