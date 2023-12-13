@@ -7,5 +7,13 @@ export const User = list({
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
     // Todo: Roles, Guides
+    favorites: relationship({
+      ref: 'FavoritesItem.user',
+      many: true,
+      ui: {
+        createView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'read' },
+      },
+    }),
   },
 });

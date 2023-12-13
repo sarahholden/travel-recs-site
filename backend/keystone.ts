@@ -1,3 +1,4 @@
+import { FavoritesItem } from './schemas/FavoritesItem';
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import 'dotenv/config';
@@ -54,6 +55,7 @@ export default withAuth(
       Guide,
       DestinationImage,
       Destination,
+      FavoritesItem,
     }),
     ui: {
       // Change for roles
