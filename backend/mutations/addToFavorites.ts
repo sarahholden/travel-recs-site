@@ -25,7 +25,10 @@ async function addToFavorites(
   const [existingFavoriteItem] = allFavoritesItems;
 
   if (existingFavoriteItem) {
-    console.log('Item is already in favorites list');
+    console.log('Removing From Favorites List');
+    return await context.lists.FavoritesItem.deleteOne({
+      id: existingFavoriteItem.id,
+    });
   }
 
   return await context.lists.FavoritesItem.createOne({
