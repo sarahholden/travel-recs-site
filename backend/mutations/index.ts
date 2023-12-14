@@ -7,7 +7,7 @@ const graphql = String.raw;
 export const extendGraphQlSchema = graphQLSchemaExtension({
   typeDefs: graphql`
     type Mutation {
-      addToFavorites(guideID: ID): FavoritesItem
+      addToFavorites(guideId: ID): FavoritesItem
     }
   `,
   resolvers: {

@@ -1,16 +1,39 @@
+/* eslint-disable */
 import { KeystoneContext } from '@keystone-next/types';
+import { FavoritesItem } from '../schemas/FavoritesItem';
+
+import { FavoritesItemCreateInput } from '../.keystone/schema-types';
+import { Session } from '../types';
 
 async function addToFavorites(
-  root: any,
-  { productId }: { productId: string },
+  _root: unknown,
+  { guideId }: { guideId: string },
   context: KeystoneContext
-) {
-  console.log('Adding to favorites!');
-  // Query the current user to see if they're signed in
-  // Query the current user's favorites
-  // See if the current item is in their cart
-  // If it is remove it
-  // If it isn't, create a new FavoritesItem
+): Promise<FavoritesItemCreateInput> {
+  // 1. Query the current user to see if they're signed in
+  const sesh = context.session as Session;
+
+  if (!sesh?.itemId) {
+    throw new Error('You must be logged in to do this!');
+  }
+
+  // 2. Query the current user's favorites
+  const allFavoritesItems = await context.lists.FavoritesItem.findMany({
+    where: { user: { id: sesh.itemId }, guide: { id: guideId } },
+  });
+
+  const [existingFavoriteItem] = allFavoritesItems;
+
+  if (existingFavoriteItem) {
+    console.log('Item is already in favorites list');
+  }
+
+  return await context.lists.FavoritesItem.createOne({
+    data: {
+      guide: { connect: { id: guideId } },
+      user: { connect: { id: sesh.itemId } },
+    },
+  });
 }
 
 export default addToFavorites;
