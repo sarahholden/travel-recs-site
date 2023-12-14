@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   Guide as guideType,
+  refetchGetFavoritesQuery,
   useAddToFavoritesMutation,
 } from "../types/generated-queries";
 import styled from "styled-components";
