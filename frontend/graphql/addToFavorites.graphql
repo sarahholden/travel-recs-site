@@ -1,0 +1,5 @@
+mutation addToFavorites($guideId: ID!) {
+  addToFavorites(guideId: $guideId) {
+    id
+  }
+}

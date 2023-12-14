@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { Guide as guideType } from "../types/generated-queries";
+import {
+  Guide as guideType,
+  useAddToFavoritesMutation,
+} from "../types/generated-queries";
 import styled from "styled-components";
 
 type GuideProps = { guide: guideType };
@@ -26,6 +29,18 @@ const GuideStyles = styled.article`
 `;
 
 export default function Guide({ guide }: GuideProps) {
+  const [addToFavoritesMutation, { data, error, loading }] =
+    useAddToFavoritesMutation({
+      variables: {
+        guideId: guide.id,
+      },
+    });
+
+  function clickHandler() {
+    addToFavoritesMutation();
+    console.log("success!");
+  }
+
   return (
     <GuideStyles>
       <div className="image-wrap">
@@ -43,6 +58,7 @@ export default function Guide({ guide }: GuideProps) {
       <h2>
         <Link href={`/guide/${guide.id}`}>{guide.name}</Link>
       </h2>
+      <button onClick={clickHandler}>Add To Favorites</button>
       {guide.location_info && <p>{guide.location_info}</p>}
     </GuideStyles>
   );

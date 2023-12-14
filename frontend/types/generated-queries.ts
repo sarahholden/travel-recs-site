@@ -732,7 +732,7 @@ export type Mutation = {
 };
 
 export type MutationAddToFavoritesArgs = {
-  guideID?: InputMaybe<Scalars["ID"]>;
+  guideId?: InputMaybe<Scalars["ID"]>;
 };
 
 export type MutationAuthenticateUserWithPasswordArgs = {
@@ -1511,6 +1511,15 @@ export type _KsListsMetaInput = {
   key?: InputMaybe<Scalars["String"]>;
 };
 
+export type AddToFavoritesMutationVariables = Exact<{
+  guideId: Scalars["ID"];
+}>;
+
+export type AddToFavoritesMutation = {
+  __typename?: "Mutation";
+  addToFavorites?: { __typename?: "FavoritesItem"; id: string } | null;
+};
+
 export type AllGuidesQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 export type AllGuidesQueryQuery = {
@@ -1709,6 +1718,56 @@ export type SignUpMutation = {
   } | null;
 };
 
+export const AddToFavoritesDocument = gql`
+  mutation addToFavorites($guideId: ID!) {
+    addToFavorites(guideId: $guideId) {
+      id
+    }
+  }
+`;
+export type AddToFavoritesMutationFn = Apollo.MutationFunction<
+  AddToFavoritesMutation,
+  AddToFavoritesMutationVariables
+>;
+
+/**
+ * __useAddToFavoritesMutation__
+ *
+ * To run a mutation, you first call `useAddToFavoritesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddToFavoritesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addToFavoritesMutation, { data, loading, error }] = useAddToFavoritesMutation({
+ *   variables: {
+ *      guideId: // value for 'guideId'
+ *   },
+ * });
+ */
+export function useAddToFavoritesMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    AddToFavoritesMutation,
+    AddToFavoritesMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    AddToFavoritesMutation,
+    AddToFavoritesMutationVariables
+  >(AddToFavoritesDocument, options);
+}
+export type AddToFavoritesMutationHookResult = ReturnType<
+  typeof useAddToFavoritesMutation
+>;
+export type AddToFavoritesMutationResult =
+  Apollo.MutationResult<AddToFavoritesMutation>;
+export type AddToFavoritesMutationOptions = Apollo.BaseMutationOptions<
+  AddToFavoritesMutation,
+  AddToFavoritesMutationVariables
+>;
 export const AllGuidesQueryDocument = gql`
   query allGuidesQuery {
     allGuides {

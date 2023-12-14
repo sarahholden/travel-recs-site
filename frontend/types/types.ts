@@ -723,7 +723,7 @@ export type Mutation = {
 };
 
 export type MutationAddToFavoritesArgs = {
-  guideID?: InputMaybe<Scalars["ID"]>;
+  guideId?: InputMaybe<Scalars["ID"]>;
 };
 
 export type MutationAuthenticateUserWithPasswordArgs = {
