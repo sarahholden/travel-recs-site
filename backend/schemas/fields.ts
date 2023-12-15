@@ -3,11 +3,11 @@ import { checkbox } from '@keystone-next/fields';
 export const permissionFields = {
   canManageGuides: checkbox({
     defaultValue: false,
-    label: 'User can Update and delete any product',
+    label: 'User can Update and delete any guide',
   }),
   canManageDestinations: checkbox({
     defaultValue: false,
-    label: 'User can Update and delete any destination',
+    label: 'User can see and manage destinations',
   }),
   canSeeOtherUsers: checkbox({
     defaultValue: false,
@@ -21,9 +21,10 @@ export const permissionFields = {
     defaultValue: false,
     label: 'User can CRUD roles',
   }),
+
   canManageOrders: checkbox({
     defaultValue: false,
-    label: 'User can see and manage saved items',
+    label: 'User can see and manage orders',
   }),
 };
 

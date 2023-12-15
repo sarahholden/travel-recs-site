@@ -33,7 +33,7 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      console.log(args);
+      // console.log(args);
       await sendPasswordResetEmail(args.token, args.identity);
     },
   },
@@ -71,7 +71,7 @@ export default withAuth(
     },
     // Add session values here
     session: withItemData(statelessSessions(sessionConfig), {
-      User: `id name email {  ${permissionsList.join(' ')} }`,
+      User: `id name email role { ${permissionsList.join(' ')} }`,
     }),
   })
 );

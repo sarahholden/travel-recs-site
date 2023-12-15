@@ -40,7 +40,7 @@ export const Guide = list({
     user: relationship({
       ref: 'User.guides',
       defaultValue: ({ context }) => ({
-        connect: { id: context.session?.itemId },
+        connect: { id: context.session.itemId },
       }),
     }),
   },
