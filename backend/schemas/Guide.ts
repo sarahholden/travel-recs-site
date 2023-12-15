@@ -37,5 +37,11 @@ export const Guide = list({
     }),
     altText: text(),
     destinations: relationship({ ref: 'Destination.guide', many: true }),
+    user: relationship({
+      ref: 'User.guides',
+      defaultValue: ({ context }) => ({
+        connect: { id: context.session?.itemId },
+      }),
+    }),
   },
 });

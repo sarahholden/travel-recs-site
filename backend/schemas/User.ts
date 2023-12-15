@@ -19,5 +19,9 @@ export const User = list({
       ref: 'Role.assignedTo',
       // TODO: Add access control
     }),
+    guides: relationship({
+      ref: 'Guide.user',
+      many: true,
+    }),
   },
 });
