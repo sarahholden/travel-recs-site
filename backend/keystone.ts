@@ -7,11 +7,13 @@ import {
 } from '@keystone-next/keystone/session';
 import { User } from './schemas/User';
 import { Guide } from './schemas/Guide';
+import { Role } from './schemas/Role';
 import { DestinationImage } from './schemas/DestinationImage';
 import { Destination } from './schemas/Destination';
 import { FavoritesItem } from './schemas/FavoritesItem';
 import { sendPasswordResetEmail } from './lib/mail';
 import { extendGraphQlSchema } from './mutations';
+import { permissionsList } from './schemas/fields';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/travel-buddy';
@@ -57,6 +59,7 @@ export default withAuth(
       DestinationImage,
       Destination,
       FavoritesItem,
+      Role,
     }),
     extendGraphqlSchema: extendGraphQlSchema,
     ui: {
@@ -68,7 +71,7 @@ export default withAuth(
     },
     // Add session values here
     session: withItemData(statelessSessions(sessionConfig), {
-      User: 'id name email',
+      User: `id name email {  ${permissionsList.join(' ')} }`,
     }),
   })
 );

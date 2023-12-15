@@ -1,6 +1,7 @@
 import { list } from '@keystone-next/keystone/schema';
 import { text, relationship, select } from '@keystone-next/fields';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
+import { isSignedIn, rules } from '../access';
 
 export const cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,6 +11,12 @@ export const cloudinary = {
 };
 
 export const Guide = list({
+  access: {
+    create: isSignedIn,
+    read: isSignedIn,
+    update: rules.canManageGuides,
+    delete: rules.canManageGuides,
+  },
   fields: {
     name: text({ isRequired: true }),
     location_info: text(),
