@@ -18,9 +18,9 @@ export const permissionFields = {
     label: 'User can CRUD roles',
   }),
 
-  canManageOrders: checkbox({
+  canManageFavorites: checkbox({
     defaultValue: false,
-    label: 'User can see and manage orders',
+    label: 'User can see and manage favorites',
   }),
 };
 

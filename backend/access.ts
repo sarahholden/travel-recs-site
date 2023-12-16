@@ -37,6 +37,17 @@ export const rules = {
     // 2. If not, do they own this item?
     return { user: { id: session.itemId } };
   },
+  canManageFavorites({ session }: ListAccessArgs) {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // 1. Do they have the permission of canManageGuides
+    if (permissions.canManageFavorites({ session })) {
+      return true;
+    }
+    // 2. If not, do they own this item?
+    return { user: { id: session.itemId } };
+  },
   canManageDestinations({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
       return false;
