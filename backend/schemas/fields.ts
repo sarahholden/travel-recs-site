@@ -5,10 +5,6 @@ export const permissionFields = {
     defaultValue: false,
     label: 'User can Update and delete any guide',
   }),
-  canManageDestinations: checkbox({
-    defaultValue: false,
-    label: 'User can see and manage destinations',
-  }),
   canSeeOtherUsers: checkbox({
     defaultValue: false,
     label: 'User can query other users',

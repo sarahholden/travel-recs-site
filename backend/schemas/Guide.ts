@@ -13,7 +13,7 @@ export const cloudinary = {
 export const Guide = list({
   access: {
     create: isSignedIn,
-    read: isSignedIn,
+    read: rules.canReadGuides,
     update: rules.canManageGuides,
     delete: rules.canManageGuides,
   },
