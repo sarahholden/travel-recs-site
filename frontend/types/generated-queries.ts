@@ -414,6 +414,7 @@ export type Guide = {
   location_info?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   status?: Maybe<Scalars["String"]>;
+  user?: Maybe<User>;
 };
 
 /**  A keystone list  */
@@ -443,6 +444,14 @@ export type GuideCreateInput = {
   location_info?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Scalars["String"]>;
+  user?: InputMaybe<UserRelateToOneInput>;
+};
+
+export type GuideRelateToManyInput = {
+  connect?: InputMaybe<Array<InputMaybe<GuideWhereUniqueInput>>>;
+  create?: InputMaybe<Array<InputMaybe<GuideCreateInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<GuideWhereUniqueInput>>>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type GuideRelateToOneInput = {
@@ -459,6 +468,7 @@ export type GuideUpdateInput = {
   location_info?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Scalars["String"]>;
+  user?: InputMaybe<UserRelateToOneInput>;
 };
 
 export type GuideWhereInput = {
@@ -550,6 +560,8 @@ export type GuideWhereInput = {
   status_not_starts_with_i?: InputMaybe<Scalars["String"]>;
   status_starts_with?: InputMaybe<Scalars["String"]>;
   status_starts_with_i?: InputMaybe<Scalars["String"]>;
+  user?: InputMaybe<UserWhereInput>;
+  user_is_null?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type GuideWhereUniqueInput = {
@@ -682,6 +694,10 @@ export type Mutation = {
   /**  Create multiple Guide items.  */
   createGuides?: Maybe<Array<Maybe<Guide>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
+  /**  Create a single Role item.  */
+  createRole?: Maybe<Role>;
+  /**  Create multiple Role items.  */
+  createRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Create a single User item.  */
   createUser?: Maybe<User>;
   /**  Create multiple User items.  */
@@ -702,6 +718,10 @@ export type Mutation = {
   deleteGuide?: Maybe<Guide>;
   /**  Delete multiple Guide items by ID.  */
   deleteGuides?: Maybe<Array<Maybe<Guide>>>;
+  /**  Delete a single Role item by ID.  */
+  deleteRole?: Maybe<Role>;
+  /**  Delete multiple Role items by ID.  */
+  deleteRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Delete a single User item by ID.  */
   deleteUser?: Maybe<User>;
   /**  Delete multiple User items by ID.  */
@@ -725,6 +745,10 @@ export type Mutation = {
   updateGuide?: Maybe<Guide>;
   /**  Update multiple Guide items by ID.  */
   updateGuides?: Maybe<Array<Maybe<Guide>>>;
+  /**  Update a single Role item by ID.  */
+  updateRole?: Maybe<Role>;
+  /**  Update multiple Role items by ID.  */
+  updateRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Update a single User item by ID.  */
   updateUser?: Maybe<User>;
   /**  Update multiple User items by ID.  */
@@ -776,6 +800,14 @@ export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
 
+export type MutationCreateRoleArgs = {
+  data?: InputMaybe<RoleCreateInput>;
+};
+
+export type MutationCreateRolesArgs = {
+  data?: InputMaybe<Array<InputMaybe<RolesCreateInput>>>;
+};
+
 export type MutationCreateUserArgs = {
   data?: InputMaybe<UserCreateInput>;
 };
@@ -813,6 +845,14 @@ export type MutationDeleteGuideArgs = {
 };
 
 export type MutationDeleteGuidesArgs = {
+  ids?: InputMaybe<Array<Scalars["ID"]>>;
+};
+
+export type MutationDeleteRoleArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteRolesArgs = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
@@ -870,6 +910,15 @@ export type MutationUpdateGuidesArgs = {
   data?: InputMaybe<Array<InputMaybe<GuidesUpdateInput>>>;
 };
 
+export type MutationUpdateRoleArgs = {
+  data?: InputMaybe<RoleUpdateInput>;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateRolesArgs = {
+  data?: InputMaybe<Array<InputMaybe<RolesUpdateInput>>>;
+};
+
 export type MutationUpdateUserArgs = {
   data?: InputMaybe<UserUpdateInput>;
   id: Scalars["ID"];
@@ -912,6 +961,8 @@ export type Query = {
   FavoritesItem?: Maybe<FavoritesItem>;
   /**  Search for the Guide item with the matching ID.  */
   Guide?: Maybe<Guide>;
+  /**  Search for the Role item with the matching ID.  */
+  Role?: Maybe<Role>;
   /**  Search for the User item with the matching ID.  */
   User?: Maybe<User>;
   /**  Retrieve the meta-data for the DestinationImage list.  */
@@ -922,6 +973,8 @@ export type Query = {
   _FavoritesItemsMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the Guide list.  */
   _GuidesMeta?: Maybe<_ListMeta>;
+  /**  Retrieve the meta-data for the Role list.  */
+  _RolesMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the User list.  */
   _UsersMeta?: Maybe<_ListMeta>;
   /**  Perform a meta-query on all DestinationImage items which match the where clause.  */
@@ -932,6 +985,8 @@ export type Query = {
   _allFavoritesItemsMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all Guide items which match the where clause.  */
   _allGuidesMeta?: Maybe<_QueryMeta>;
+  /**  Perform a meta-query on all Role items which match the where clause.  */
+  _allRolesMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all User items which match the where clause.  */
   _allUsersMeta?: Maybe<_QueryMeta>;
   /**  Retrieve the meta-data for all lists.  */
@@ -944,6 +999,8 @@ export type Query = {
   allFavoritesItems?: Maybe<Array<Maybe<FavoritesItem>>>;
   /**  Search for all Guide items which match the where clause.  */
   allGuides?: Maybe<Array<Maybe<Guide>>>;
+  /**  Search for all Role items which match the where clause.  */
+  allRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Search for all User items which match the where clause.  */
   allUsers?: Maybe<Array<Maybe<User>>>;
   /** The version of the Keystone application serving this API. */
@@ -967,6 +1024,10 @@ export type QueryFavoritesItemArgs = {
 
 export type QueryGuideArgs = {
   where: GuideWhereUniqueInput;
+};
+
+export type QueryRoleArgs = {
+  where: RoleWhereUniqueInput;
 };
 
 export type QueryUserArgs = {
@@ -1007,6 +1068,15 @@ export type Query_AllGuidesMetaArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortGuidesBy>>;
   where?: InputMaybe<GuideWhereInput>;
+};
+
+export type Query_AllRolesMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortRolesBy>>;
+  where?: InputMaybe<RoleWhereInput>;
 };
 
 export type Query_AllUsersMetaArgs = {
@@ -1058,6 +1128,15 @@ export type QueryAllGuidesArgs = {
   where?: InputMaybe<GuideWhereInput>;
 };
 
+export type QueryAllRolesArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortRolesBy>>;
+  where?: InputMaybe<RoleWhereInput>;
+};
+
 export type QueryAllUsersArgs = {
   first?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Scalars["String"]>;
@@ -1076,6 +1155,123 @@ export type RedeemUserPasswordResetTokenResult = {
   __typename?: "RedeemUserPasswordResetTokenResult";
   code: PasswordResetRedemptionErrorCode;
   message: Scalars["String"];
+};
+
+/**  A keystone list  */
+export type Role = {
+  __typename?: "Role";
+  _assignedToMeta?: Maybe<_QueryMeta>;
+  assignedTo: Array<User>;
+  canManageFavorites?: Maybe<Scalars["Boolean"]>;
+  canManageGuides?: Maybe<Scalars["Boolean"]>;
+  canManageRoles?: Maybe<Scalars["Boolean"]>;
+  canManageUsers?: Maybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: Maybe<Scalars["Boolean"]>;
+  id: Scalars["ID"];
+  name?: Maybe<Scalars["String"]>;
+};
+
+/**  A keystone list  */
+export type Role_AssignedToMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortUsersBy>>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+/**  A keystone list  */
+export type RoleAssignedToArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortUsersBy>>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type RoleCreateInput = {
+  assignedTo?: InputMaybe<UserRelateToManyInput>;
+  canManageFavorites?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: InputMaybe<Scalars["Boolean"]>;
+  name?: InputMaybe<Scalars["String"]>;
+};
+
+export type RoleRelateToOneInput = {
+  connect?: InputMaybe<RoleWhereUniqueInput>;
+  create?: InputMaybe<RoleCreateInput>;
+  disconnect?: InputMaybe<RoleWhereUniqueInput>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type RoleUpdateInput = {
+  assignedTo?: InputMaybe<UserRelateToManyInput>;
+  canManageFavorites?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: InputMaybe<Scalars["Boolean"]>;
+  name?: InputMaybe<Scalars["String"]>;
+};
+
+export type RoleWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<RoleWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<RoleWhereInput>>>;
+  /**  condition must be true for all nodes  */
+  assignedTo_every?: InputMaybe<UserWhereInput>;
+  /**  condition must be false for all nodes  */
+  assignedTo_none?: InputMaybe<UserWhereInput>;
+  /**  condition must be true for at least 1 node  */
+  assignedTo_some?: InputMaybe<UserWhereInput>;
+  canManageFavorites?: InputMaybe<Scalars["Boolean"]>;
+  canManageFavorites_not?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides_not?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles_not?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers_not?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers_not?: InputMaybe<Scalars["Boolean"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  id_not?: InputMaybe<Scalars["ID"]>;
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  name?: InputMaybe<Scalars["String"]>;
+  name_contains?: InputMaybe<Scalars["String"]>;
+  name_contains_i?: InputMaybe<Scalars["String"]>;
+  name_ends_with?: InputMaybe<Scalars["String"]>;
+  name_ends_with_i?: InputMaybe<Scalars["String"]>;
+  name_i?: InputMaybe<Scalars["String"]>;
+  name_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  name_not?: InputMaybe<Scalars["String"]>;
+  name_not_contains?: InputMaybe<Scalars["String"]>;
+  name_not_contains_i?: InputMaybe<Scalars["String"]>;
+  name_not_ends_with?: InputMaybe<Scalars["String"]>;
+  name_not_ends_with_i?: InputMaybe<Scalars["String"]>;
+  name_not_i?: InputMaybe<Scalars["String"]>;
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  name_not_starts_with?: InputMaybe<Scalars["String"]>;
+  name_not_starts_with_i?: InputMaybe<Scalars["String"]>;
+  name_starts_with?: InputMaybe<Scalars["String"]>;
+  name_starts_with_i?: InputMaybe<Scalars["String"]>;
+};
+
+export type RoleWhereUniqueInput = {
+  id: Scalars["ID"];
+};
+
+export type RolesCreateInput = {
+  data?: InputMaybe<RoleCreateInput>;
+};
+
+export type RolesUpdateInput = {
+  data?: InputMaybe<RoleUpdateInput>;
+  id: Scalars["ID"];
 };
 
 export type SendUserPasswordResetLinkResult = {
@@ -1134,6 +1330,27 @@ export enum SortGuidesBy {
   NameDesc = "name_DESC",
   StatusAsc = "status_ASC",
   StatusDesc = "status_DESC",
+  UserAsc = "user_ASC",
+  UserDesc = "user_DESC",
+}
+
+export enum SortRolesBy {
+  AssignedToAsc = "assignedTo_ASC",
+  AssignedToDesc = "assignedTo_DESC",
+  CanManageFavoritesAsc = "canManageFavorites_ASC",
+  CanManageFavoritesDesc = "canManageFavorites_DESC",
+  CanManageGuidesAsc = "canManageGuides_ASC",
+  CanManageGuidesDesc = "canManageGuides_DESC",
+  CanManageRolesAsc = "canManageRoles_ASC",
+  CanManageRolesDesc = "canManageRoles_DESC",
+  CanManageUsersAsc = "canManageUsers_ASC",
+  CanManageUsersDesc = "canManageUsers_DESC",
+  CanSeeOtherUsersAsc = "canSeeOtherUsers_ASC",
+  CanSeeOtherUsersDesc = "canSeeOtherUsers_DESC",
+  IdAsc = "id_ASC",
+  IdDesc = "id_DESC",
+  NameAsc = "name_ASC",
+  NameDesc = "name_DESC",
 }
 
 export enum SortUsersBy {
@@ -1141,6 +1358,8 @@ export enum SortUsersBy {
   EmailDesc = "email_DESC",
   FavoritesAsc = "favorites_ASC",
   FavoritesDesc = "favorites_DESC",
+  GuidesAsc = "guides_ASC",
+  GuidesDesc = "guides_DESC",
   IdAsc = "id_ASC",
   IdDesc = "id_DESC",
   MagicAuthIssuedAtAsc = "magicAuthIssuedAt_ASC",
@@ -1153,14 +1372,18 @@ export enum SortUsersBy {
   PasswordResetIssuedAtDesc = "passwordResetIssuedAt_DESC",
   PasswordResetRedeemedAtAsc = "passwordResetRedeemedAt_ASC",
   PasswordResetRedeemedAtDesc = "passwordResetRedeemedAt_DESC",
+  RoleAsc = "role_ASC",
+  RoleDesc = "role_DESC",
 }
 
 /**  A keystone list  */
 export type User = {
   __typename?: "User";
   _favoritesMeta?: Maybe<_QueryMeta>;
+  _guidesMeta?: Maybe<_QueryMeta>;
   email?: Maybe<Scalars["String"]>;
   favorites: Array<FavoritesItem>;
+  guides: Array<Guide>;
   id: Scalars["ID"];
   magicAuthIssuedAt?: Maybe<Scalars["String"]>;
   magicAuthRedeemedAt?: Maybe<Scalars["String"]>;
@@ -1170,6 +1393,7 @@ export type User = {
   passwordResetRedeemedAt?: Maybe<Scalars["String"]>;
   passwordResetToken_is_set?: Maybe<Scalars["Boolean"]>;
   password_is_set?: Maybe<Scalars["Boolean"]>;
+  role?: Maybe<Role>;
 };
 
 /**  A keystone list  */
@@ -1183,6 +1407,16 @@ export type User_FavoritesMetaArgs = {
 };
 
 /**  A keystone list  */
+export type User_GuidesMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortGuidesBy>>;
+  where?: InputMaybe<GuideWhereInput>;
+};
+
+/**  A keystone list  */
 export type UserFavoritesArgs = {
   first?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Scalars["String"]>;
@@ -1190,6 +1424,16 @@ export type UserFavoritesArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortFavoritesItemsBy>>;
   where?: InputMaybe<FavoritesItemWhereInput>;
+};
+
+/**  A keystone list  */
+export type UserGuidesArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortGuidesBy>>;
+  where?: InputMaybe<GuideWhereInput>;
 };
 
 export type UserAuthenticationWithPasswordFailure = {
@@ -1211,6 +1455,7 @@ export type UserAuthenticationWithPasswordSuccess = {
 export type UserCreateInput = {
   email?: InputMaybe<Scalars["String"]>;
   favorites?: InputMaybe<FavoritesItemRelateToManyInput>;
+  guides?: InputMaybe<GuideRelateToManyInput>;
   magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
   magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
   magicAuthToken?: InputMaybe<Scalars["String"]>;
@@ -1219,6 +1464,14 @@ export type UserCreateInput = {
   passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
   passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
   passwordResetToken?: InputMaybe<Scalars["String"]>;
+  role?: InputMaybe<RoleRelateToOneInput>;
+};
+
+export type UserRelateToManyInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserWhereUniqueInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserCreateInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserWhereUniqueInput>>>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type UserRelateToOneInput = {
@@ -1231,6 +1484,7 @@ export type UserRelateToOneInput = {
 export type UserUpdateInput = {
   email?: InputMaybe<Scalars["String"]>;
   favorites?: InputMaybe<FavoritesItemRelateToManyInput>;
+  guides?: InputMaybe<GuideRelateToManyInput>;
   magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
   magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
   magicAuthToken?: InputMaybe<Scalars["String"]>;
@@ -1239,6 +1493,7 @@ export type UserUpdateInput = {
   passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
   passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
   passwordResetToken?: InputMaybe<Scalars["String"]>;
+  role?: InputMaybe<RoleRelateToOneInput>;
 };
 
 export type UserWhereInput = {
@@ -1268,6 +1523,12 @@ export type UserWhereInput = {
   favorites_none?: InputMaybe<FavoritesItemWhereInput>;
   /**  condition must be true for at least 1 node  */
   favorites_some?: InputMaybe<FavoritesItemWhereInput>;
+  /**  condition must be true for all nodes  */
+  guides_every?: InputMaybe<GuideWhereInput>;
+  /**  condition must be false for all nodes  */
+  guides_none?: InputMaybe<GuideWhereInput>;
+  /**  condition must be true for at least 1 node  */
+  guides_some?: InputMaybe<GuideWhereInput>;
   id?: InputMaybe<Scalars["ID"]>;
   id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   id_not?: InputMaybe<Scalars["ID"]>;
@@ -1329,6 +1590,8 @@ export type UserWhereInput = {
   >;
   passwordResetToken_is_set?: InputMaybe<Scalars["Boolean"]>;
   password_is_set?: InputMaybe<Scalars["Boolean"]>;
+  role?: InputMaybe<RoleWhereInput>;
+  role_is_null?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type UserWhereUniqueInput = {
@@ -1530,6 +1793,7 @@ export type AllGuidesQueryQuery = {
     name?: string | null;
     location_info?: string | null;
     status?: string | null;
+    altText?: string | null;
     image?: {
       __typename?: "CloudinaryImage_File";
       publicUrlTransformed?: string | null;
@@ -1582,6 +1846,11 @@ export type GetFavoritesQuery = {
       name?: string | null;
       location_info?: string | null;
       status?: string | null;
+      altText?: string | null;
+      image?: {
+        __typename?: "CloudinaryImage_File";
+        publicUrlTransformed?: string | null;
+      } | null;
       destinations: Array<{
         __typename?: "Destination";
         id: string;
@@ -1751,7 +2020,7 @@ export function useAddToFavoritesMutation(
   baseOptions?: Apollo.MutationHookOptions<
     AddToFavoritesMutation,
     AddToFavoritesMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -1778,6 +2047,7 @@ export const AllGuidesQueryDocument = gql`
       image {
         publicUrlTransformed
       }
+      altText
       destinations {
         id
         name
@@ -1812,24 +2082,24 @@ export function useAllGuidesQueryQuery(
   baseOptions?: Apollo.QueryHookOptions<
     AllGuidesQueryQuery,
     AllGuidesQueryQueryVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>(
     AllGuidesQueryDocument,
-    options,
+    options
   );
 }
 export function useAllGuidesQueryLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     AllGuidesQueryQuery,
     AllGuidesQueryQueryVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>(
     AllGuidesQueryDocument,
-    options,
+    options
   );
 }
 export type AllGuidesQueryQueryHookResult = ReturnType<
@@ -1843,7 +2113,7 @@ export type AllGuidesQueryQueryResult = Apollo.QueryResult<
   AllGuidesQueryQueryVariables
 >;
 export function refetchAllGuidesQueryQuery(
-  variables?: AllGuidesQueryQueryVariables,
+  variables?: AllGuidesQueryQueryVariables
 ) {
   return { query: AllGuidesQueryDocument, variables: variables };
 }
@@ -1896,12 +2166,12 @@ export function useCreateGuideMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateGuideMutation,
     CreateGuideMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<CreateGuideMutation, CreateGuideMutationVariables>(
     CreateGuideDocument,
-    options,
+    options
   );
 }
 export type CreateGuideMutationHookResult = ReturnType<
@@ -1922,6 +2192,10 @@ export const GetFavoritesDocument = gql`
         name
         location_info
         status
+        image {
+          publicUrlTransformed
+        }
+        altText
         destinations {
           id
           name
@@ -1958,24 +2232,24 @@ export function useGetFavoritesQuery(
   baseOptions: Apollo.QueryHookOptions<
     GetFavoritesQuery,
     GetFavoritesQueryVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetFavoritesQuery, GetFavoritesQueryVariables>(
     GetFavoritesDocument,
-    options,
+    options
   );
 }
 export function useGetFavoritesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetFavoritesQuery,
     GetFavoritesQueryVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetFavoritesQuery, GetFavoritesQueryVariables>(
     GetFavoritesDocument,
-    options,
+    options
   );
 }
 export type GetFavoritesQueryHookResult = ReturnType<
@@ -1989,7 +2263,7 @@ export type GetFavoritesQueryResult = Apollo.QueryResult<
   GetFavoritesQueryVariables
 >;
 export function refetchGetFavoritesQuery(
-  variables: GetFavoritesQueryVariables,
+  variables: GetFavoritesQueryVariables
 ) {
   return { query: GetFavoritesDocument, variables: variables };
 }
@@ -2036,24 +2310,24 @@ export const GetGuideDocument = gql`
  * });
  */
 export function useGetGuideQuery(
-  baseOptions: Apollo.QueryHookOptions<GetGuideQuery, GetGuideQueryVariables>,
+  baseOptions: Apollo.QueryHookOptions<GetGuideQuery, GetGuideQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetGuideQuery, GetGuideQueryVariables>(
     GetGuideDocument,
-    options,
+    options
   );
 }
 export function useGetGuideLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetGuideQuery,
     GetGuideQueryVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetGuideQuery, GetGuideQueryVariables>(
     GetGuideDocument,
-    options,
+    options
   );
 }
 export type GetGuideQueryHookResult = ReturnType<typeof useGetGuideQuery>;
@@ -2095,18 +2369,18 @@ export const UserDocument = gql`
  * });
  */
 export function useUserQuery(
-  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>,
+  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
 export function useUserLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>,
+  baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(
     UserDocument,
-    options,
+    options
   );
 }
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
@@ -2149,7 +2423,7 @@ export function useRequestResetMutation(
   baseOptions?: Apollo.MutationHookOptions<
     RequestResetMutation,
     RequestResetMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -2206,7 +2480,7 @@ export function useResetPasswordMutation(
   baseOptions?: Apollo.MutationHookOptions<
     ResetPasswordMutation,
     ResetPasswordMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -2267,12 +2541,12 @@ export function useSignInMutation(
   baseOptions?: Apollo.MutationHookOptions<
     SignInMutation,
     SignInMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<SignInMutation, SignInMutationVariables>(
     SignInDocument,
-    options,
+    options
   );
 }
 export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
@@ -2311,12 +2585,12 @@ export function useSignOutMutation(
   baseOptions?: Apollo.MutationHookOptions<
     SignOutMutation,
     SignOutMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<SignOutMutation, SignOutMutationVariables>(
     SignOutDocument,
-    options,
+    options
   );
 }
 export type SignOutMutationHookResult = ReturnType<typeof useSignOutMutation>;
@@ -2362,12 +2636,12 @@ export function useSignUpMutation(
   baseOptions?: Apollo.MutationHookOptions<
     SignUpMutation,
     SignUpMutationVariables
-  >,
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(
     SignUpDocument,
-    options,
+    options
   );
 }
 export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
@@ -2453,6 +2727,7 @@ export type GuideKeySpecifier = (
   | "location_info"
   | "name"
   | "status"
+  | "user"
   | GuideKeySpecifier
 )[];
 export type GuideFieldPolicy = {
@@ -2464,6 +2739,7 @@ export type GuideFieldPolicy = {
   location_info?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
   status?: FieldPolicy<any> | FieldReadFunction<any>;
+  user?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type KeystoneAdminMetaKeySpecifier = (
   | "enableSessionItem"
@@ -2587,6 +2863,8 @@ export type MutationKeySpecifier = (
   | "createGuide"
   | "createGuides"
   | "createInitialUser"
+  | "createRole"
+  | "createRoles"
   | "createUser"
   | "createUsers"
   | "deleteDestination"
@@ -2597,6 +2875,8 @@ export type MutationKeySpecifier = (
   | "deleteFavoritesItems"
   | "deleteGuide"
   | "deleteGuides"
+  | "deleteRole"
+  | "deleteRoles"
   | "deleteUser"
   | "deleteUsers"
   | "endSession"
@@ -2610,6 +2890,8 @@ export type MutationKeySpecifier = (
   | "updateFavoritesItems"
   | "updateGuide"
   | "updateGuides"
+  | "updateRole"
+  | "updateRoles"
   | "updateUser"
   | "updateUsers"
   | MutationKeySpecifier
@@ -2626,6 +2908,8 @@ export type MutationFieldPolicy = {
   createGuide?: FieldPolicy<any> | FieldReadFunction<any>;
   createGuides?: FieldPolicy<any> | FieldReadFunction<any>;
   createInitialUser?: FieldPolicy<any> | FieldReadFunction<any>;
+  createRole?: FieldPolicy<any> | FieldReadFunction<any>;
+  createRoles?: FieldPolicy<any> | FieldReadFunction<any>;
   createUser?: FieldPolicy<any> | FieldReadFunction<any>;
   createUsers?: FieldPolicy<any> | FieldReadFunction<any>;
   deleteDestination?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -2636,6 +2920,8 @@ export type MutationFieldPolicy = {
   deleteFavoritesItems?: FieldPolicy<any> | FieldReadFunction<any>;
   deleteGuide?: FieldPolicy<any> | FieldReadFunction<any>;
   deleteGuides?: FieldPolicy<any> | FieldReadFunction<any>;
+  deleteRole?: FieldPolicy<any> | FieldReadFunction<any>;
+  deleteRoles?: FieldPolicy<any> | FieldReadFunction<any>;
   deleteUser?: FieldPolicy<any> | FieldReadFunction<any>;
   deleteUsers?: FieldPolicy<any> | FieldReadFunction<any>;
   endSession?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -2649,6 +2935,8 @@ export type MutationFieldPolicy = {
   updateFavoritesItems?: FieldPolicy<any> | FieldReadFunction<any>;
   updateGuide?: FieldPolicy<any> | FieldReadFunction<any>;
   updateGuides?: FieldPolicy<any> | FieldReadFunction<any>;
+  updateRole?: FieldPolicy<any> | FieldReadFunction<any>;
+  updateRoles?: FieldPolicy<any> | FieldReadFunction<any>;
   updateUser?: FieldPolicy<any> | FieldReadFunction<any>;
   updateUsers?: FieldPolicy<any> | FieldReadFunction<any>;
 };
@@ -2657,22 +2945,26 @@ export type QueryKeySpecifier = (
   | "DestinationImage"
   | "FavoritesItem"
   | "Guide"
+  | "Role"
   | "User"
   | "_DestinationImagesMeta"
   | "_DestinationsMeta"
   | "_FavoritesItemsMeta"
   | "_GuidesMeta"
+  | "_RolesMeta"
   | "_UsersMeta"
   | "_allDestinationImagesMeta"
   | "_allDestinationsMeta"
   | "_allFavoritesItemsMeta"
   | "_allGuidesMeta"
+  | "_allRolesMeta"
   | "_allUsersMeta"
   | "_ksListsMeta"
   | "allDestinationImages"
   | "allDestinations"
   | "allFavoritesItems"
   | "allGuides"
+  | "allRoles"
   | "allUsers"
   | "appVersion"
   | "authenticatedItem"
@@ -2685,22 +2977,26 @@ export type QueryFieldPolicy = {
   DestinationImage?: FieldPolicy<any> | FieldReadFunction<any>;
   FavoritesItem?: FieldPolicy<any> | FieldReadFunction<any>;
   Guide?: FieldPolicy<any> | FieldReadFunction<any>;
+  Role?: FieldPolicy<any> | FieldReadFunction<any>;
   User?: FieldPolicy<any> | FieldReadFunction<any>;
   _DestinationImagesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _DestinationsMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _FavoritesItemsMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _GuidesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
+  _RolesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _UsersMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _allDestinationImagesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _allDestinationsMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _allFavoritesItemsMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _allGuidesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
+  _allRolesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _allUsersMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   _ksListsMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   allDestinationImages?: FieldPolicy<any> | FieldReadFunction<any>;
   allDestinations?: FieldPolicy<any> | FieldReadFunction<any>;
   allFavoritesItems?: FieldPolicy<any> | FieldReadFunction<any>;
   allGuides?: FieldPolicy<any> | FieldReadFunction<any>;
+  allRoles?: FieldPolicy<any> | FieldReadFunction<any>;
   allUsers?: FieldPolicy<any> | FieldReadFunction<any>;
   appVersion?: FieldPolicy<any> | FieldReadFunction<any>;
   authenticatedItem?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -2716,6 +3012,29 @@ export type RedeemUserPasswordResetTokenResultFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
+export type RoleKeySpecifier = (
+  | "_assignedToMeta"
+  | "assignedTo"
+  | "canManageFavorites"
+  | "canManageGuides"
+  | "canManageRoles"
+  | "canManageUsers"
+  | "canSeeOtherUsers"
+  | "id"
+  | "name"
+  | RoleKeySpecifier
+)[];
+export type RoleFieldPolicy = {
+  _assignedToMeta?: FieldPolicy<any> | FieldReadFunction<any>;
+  assignedTo?: FieldPolicy<any> | FieldReadFunction<any>;
+  canManageFavorites?: FieldPolicy<any> | FieldReadFunction<any>;
+  canManageGuides?: FieldPolicy<any> | FieldReadFunction<any>;
+  canManageRoles?: FieldPolicy<any> | FieldReadFunction<any>;
+  canManageUsers?: FieldPolicy<any> | FieldReadFunction<any>;
+  canSeeOtherUsers?: FieldPolicy<any> | FieldReadFunction<any>;
+  id?: FieldPolicy<any> | FieldReadFunction<any>;
+  name?: FieldPolicy<any> | FieldReadFunction<any>;
+};
 export type SendUserPasswordResetLinkResultKeySpecifier = (
   | "code"
   | "message"
@@ -2727,8 +3046,10 @@ export type SendUserPasswordResetLinkResultFieldPolicy = {
 };
 export type UserKeySpecifier = (
   | "_favoritesMeta"
+  | "_guidesMeta"
   | "email"
   | "favorites"
+  | "guides"
   | "id"
   | "magicAuthIssuedAt"
   | "magicAuthRedeemedAt"
@@ -2738,12 +3059,15 @@ export type UserKeySpecifier = (
   | "passwordResetRedeemedAt"
   | "passwordResetToken_is_set"
   | "password_is_set"
+  | "role"
   | UserKeySpecifier
 )[];
 export type UserFieldPolicy = {
   _favoritesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
+  _guidesMeta?: FieldPolicy<any> | FieldReadFunction<any>;
   email?: FieldPolicy<any> | FieldReadFunction<any>;
   favorites?: FieldPolicy<any> | FieldReadFunction<any>;
+  guides?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
   magicAuthIssuedAt?: FieldPolicy<any> | FieldReadFunction<any>;
   magicAuthRedeemedAt?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -2753,6 +3077,7 @@ export type UserFieldPolicy = {
   passwordResetRedeemedAt?: FieldPolicy<any> | FieldReadFunction<any>;
   passwordResetToken_is_set?: FieldPolicy<any> | FieldReadFunction<any>;
   password_is_set?: FieldPolicy<any> | FieldReadFunction<any>;
+  role?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type UserAuthenticationWithPasswordFailureKeySpecifier = (
   | "code"
@@ -3029,6 +3354,10 @@ export type StrictTypedTypePolicies = {
       | RedeemUserPasswordResetTokenResultKeySpecifier
       | (() => undefined | RedeemUserPasswordResetTokenResultKeySpecifier);
     fields?: RedeemUserPasswordResetTokenResultFieldPolicy;
+  };
+  Role?: Omit<TypePolicy, "fields" | "keyFields"> & {
+    keyFields?: false | RoleKeySpecifier | (() => undefined | RoleKeySpecifier);
+    fields?: RoleFieldPolicy;
   };
   SendUserPasswordResetLinkResult?: Omit<TypePolicy, "fields" | "keyFields"> & {
     keyFields?:

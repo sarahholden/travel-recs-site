@@ -1,6 +1,6 @@
 import Guide from "./Guide";
-import { useAllGuidesQueryQuery } from "../types/generated-queries";
 import styled from "styled-components";
+import { Guide as GuideQueryType } from "../types/generated-queries";
 
 const GuideGrid = styled.div`
   display: grid;
@@ -8,18 +8,14 @@ const GuideGrid = styled.div`
   grid-gap: 3rem;
 `;
 
-export default function Guides() {
-  const { data, error, loading } = useAllGuidesQueryQuery();
-  console.log(data, error, loading);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
+type GuideType = GuideQueryType | null | undefined;
+
+export default function Guides({ guides }: { guides?: GuideType[] }) {
   return (
     // TODO: Fix this error
     <GuideGrid>
-      {data?.allGuides ? (
-        data.allGuides.map(
-          (guide) => guide && <Guide key={guide?.id} guide={guide} />
-        )
+      {guides ? (
+        guides.map((guide) => guide && <Guide key={guide?.id} guide={guide} />)
       ) : (
         <div>There are no guides</div>
       )}

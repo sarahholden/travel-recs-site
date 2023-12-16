@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   Guide as guideType,
-  refetchGetFavoritesQuery,
   useAddToFavoritesMutation,
 } from "../types/generated-queries";
 import styled from "styled-components";
@@ -12,11 +11,11 @@ const GuideStyles = styled.article`
   .image-wrap {
     display: block;
     width: 100%;
-    padding-bottom: 60%;
+    padding-bottom: 70%;
     height: 0;
     overflow: hidden;
     position: relative;
-    border-radius: 3rem 3rem 0.4rem 0.4rem;
+    border-radius: 1.6rem;
     img {
       object-fit: cover;
       object-position: center center;
@@ -59,7 +58,9 @@ export default function Guide({ guide }: GuideProps) {
       <h2>
         <Link href={`/guide/${guide.id}`}>{guide.name}</Link>
       </h2>
-      <button onClick={clickHandler}>Add To Favorites</button>
+      <button onClick={clickHandler} aria-label="Add To Favorites">
+        Heart
+      </button>
       {guide.location_info && <p>{guide.location_info}</p>}
     </GuideStyles>
   );

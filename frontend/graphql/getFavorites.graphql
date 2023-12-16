@@ -6,6 +6,10 @@ query getFavorites($userId: ID!) {
       name
       location_info
       status
+      image {
+        publicUrlTransformed
+      }
+      altText
       destinations {
         id
         name

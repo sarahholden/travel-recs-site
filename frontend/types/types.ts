@@ -405,6 +405,7 @@ export type Guide = {
   location_info?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   status?: Maybe<Scalars["String"]>;
+  user?: Maybe<User>;
 };
 
 /**  A keystone list  */
@@ -434,6 +435,14 @@ export type GuideCreateInput = {
   location_info?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Scalars["String"]>;
+  user?: InputMaybe<UserRelateToOneInput>;
+};
+
+export type GuideRelateToManyInput = {
+  connect?: InputMaybe<Array<InputMaybe<GuideWhereUniqueInput>>>;
+  create?: InputMaybe<Array<InputMaybe<GuideCreateInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<GuideWhereUniqueInput>>>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type GuideRelateToOneInput = {
@@ -450,6 +459,7 @@ export type GuideUpdateInput = {
   location_info?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Scalars["String"]>;
+  user?: InputMaybe<UserRelateToOneInput>;
 };
 
 export type GuideWhereInput = {
@@ -541,6 +551,8 @@ export type GuideWhereInput = {
   status_not_starts_with_i?: InputMaybe<Scalars["String"]>;
   status_starts_with?: InputMaybe<Scalars["String"]>;
   status_starts_with_i?: InputMaybe<Scalars["String"]>;
+  user?: InputMaybe<UserWhereInput>;
+  user_is_null?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type GuideWhereUniqueInput = {
@@ -673,6 +685,10 @@ export type Mutation = {
   /**  Create multiple Guide items.  */
   createGuides?: Maybe<Array<Maybe<Guide>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
+  /**  Create a single Role item.  */
+  createRole?: Maybe<Role>;
+  /**  Create multiple Role items.  */
+  createRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Create a single User item.  */
   createUser?: Maybe<User>;
   /**  Create multiple User items.  */
@@ -693,6 +709,10 @@ export type Mutation = {
   deleteGuide?: Maybe<Guide>;
   /**  Delete multiple Guide items by ID.  */
   deleteGuides?: Maybe<Array<Maybe<Guide>>>;
+  /**  Delete a single Role item by ID.  */
+  deleteRole?: Maybe<Role>;
+  /**  Delete multiple Role items by ID.  */
+  deleteRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Delete a single User item by ID.  */
   deleteUser?: Maybe<User>;
   /**  Delete multiple User items by ID.  */
@@ -716,6 +736,10 @@ export type Mutation = {
   updateGuide?: Maybe<Guide>;
   /**  Update multiple Guide items by ID.  */
   updateGuides?: Maybe<Array<Maybe<Guide>>>;
+  /**  Update a single Role item by ID.  */
+  updateRole?: Maybe<Role>;
+  /**  Update multiple Role items by ID.  */
+  updateRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Update a single User item by ID.  */
   updateUser?: Maybe<User>;
   /**  Update multiple User items by ID.  */
@@ -767,6 +791,14 @@ export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
 
+export type MutationCreateRoleArgs = {
+  data?: InputMaybe<RoleCreateInput>;
+};
+
+export type MutationCreateRolesArgs = {
+  data?: InputMaybe<Array<InputMaybe<RolesCreateInput>>>;
+};
+
 export type MutationCreateUserArgs = {
   data?: InputMaybe<UserCreateInput>;
 };
@@ -804,6 +836,14 @@ export type MutationDeleteGuideArgs = {
 };
 
 export type MutationDeleteGuidesArgs = {
+  ids?: InputMaybe<Array<Scalars["ID"]>>;
+};
+
+export type MutationDeleteRoleArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteRolesArgs = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
@@ -861,6 +901,15 @@ export type MutationUpdateGuidesArgs = {
   data?: InputMaybe<Array<InputMaybe<GuidesUpdateInput>>>;
 };
 
+export type MutationUpdateRoleArgs = {
+  data?: InputMaybe<RoleUpdateInput>;
+  id: Scalars["ID"];
+};
+
+export type MutationUpdateRolesArgs = {
+  data?: InputMaybe<Array<InputMaybe<RolesUpdateInput>>>;
+};
+
 export type MutationUpdateUserArgs = {
   data?: InputMaybe<UserUpdateInput>;
   id: Scalars["ID"];
@@ -903,6 +952,8 @@ export type Query = {
   FavoritesItem?: Maybe<FavoritesItem>;
   /**  Search for the Guide item with the matching ID.  */
   Guide?: Maybe<Guide>;
+  /**  Search for the Role item with the matching ID.  */
+  Role?: Maybe<Role>;
   /**  Search for the User item with the matching ID.  */
   User?: Maybe<User>;
   /**  Retrieve the meta-data for the DestinationImage list.  */
@@ -913,6 +964,8 @@ export type Query = {
   _FavoritesItemsMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the Guide list.  */
   _GuidesMeta?: Maybe<_ListMeta>;
+  /**  Retrieve the meta-data for the Role list.  */
+  _RolesMeta?: Maybe<_ListMeta>;
   /**  Retrieve the meta-data for the User list.  */
   _UsersMeta?: Maybe<_ListMeta>;
   /**  Perform a meta-query on all DestinationImage items which match the where clause.  */
@@ -923,6 +976,8 @@ export type Query = {
   _allFavoritesItemsMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all Guide items which match the where clause.  */
   _allGuidesMeta?: Maybe<_QueryMeta>;
+  /**  Perform a meta-query on all Role items which match the where clause.  */
+  _allRolesMeta?: Maybe<_QueryMeta>;
   /**  Perform a meta-query on all User items which match the where clause.  */
   _allUsersMeta?: Maybe<_QueryMeta>;
   /**  Retrieve the meta-data for all lists.  */
@@ -935,6 +990,8 @@ export type Query = {
   allFavoritesItems?: Maybe<Array<Maybe<FavoritesItem>>>;
   /**  Search for all Guide items which match the where clause.  */
   allGuides?: Maybe<Array<Maybe<Guide>>>;
+  /**  Search for all Role items which match the where clause.  */
+  allRoles?: Maybe<Array<Maybe<Role>>>;
   /**  Search for all User items which match the where clause.  */
   allUsers?: Maybe<Array<Maybe<User>>>;
   /** The version of the Keystone application serving this API. */
@@ -958,6 +1015,10 @@ export type QueryFavoritesItemArgs = {
 
 export type QueryGuideArgs = {
   where: GuideWhereUniqueInput;
+};
+
+export type QueryRoleArgs = {
+  where: RoleWhereUniqueInput;
 };
 
 export type QueryUserArgs = {
@@ -998,6 +1059,15 @@ export type Query_AllGuidesMetaArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortGuidesBy>>;
   where?: InputMaybe<GuideWhereInput>;
+};
+
+export type Query_AllRolesMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortRolesBy>>;
+  where?: InputMaybe<RoleWhereInput>;
 };
 
 export type Query_AllUsersMetaArgs = {
@@ -1049,6 +1119,15 @@ export type QueryAllGuidesArgs = {
   where?: InputMaybe<GuideWhereInput>;
 };
 
+export type QueryAllRolesArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortRolesBy>>;
+  where?: InputMaybe<RoleWhereInput>;
+};
+
 export type QueryAllUsersArgs = {
   first?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Scalars["String"]>;
@@ -1067,6 +1146,123 @@ export type RedeemUserPasswordResetTokenResult = {
   __typename?: "RedeemUserPasswordResetTokenResult";
   code: PasswordResetRedemptionErrorCode;
   message: Scalars["String"];
+};
+
+/**  A keystone list  */
+export type Role = {
+  __typename?: "Role";
+  _assignedToMeta?: Maybe<_QueryMeta>;
+  assignedTo: Array<User>;
+  canManageFavorites?: Maybe<Scalars["Boolean"]>;
+  canManageGuides?: Maybe<Scalars["Boolean"]>;
+  canManageRoles?: Maybe<Scalars["Boolean"]>;
+  canManageUsers?: Maybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: Maybe<Scalars["Boolean"]>;
+  id: Scalars["ID"];
+  name?: Maybe<Scalars["String"]>;
+};
+
+/**  A keystone list  */
+export type Role_AssignedToMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortUsersBy>>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+/**  A keystone list  */
+export type RoleAssignedToArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortUsersBy>>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type RoleCreateInput = {
+  assignedTo?: InputMaybe<UserRelateToManyInput>;
+  canManageFavorites?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: InputMaybe<Scalars["Boolean"]>;
+  name?: InputMaybe<Scalars["String"]>;
+};
+
+export type RoleRelateToOneInput = {
+  connect?: InputMaybe<RoleWhereUniqueInput>;
+  create?: InputMaybe<RoleCreateInput>;
+  disconnect?: InputMaybe<RoleWhereUniqueInput>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type RoleUpdateInput = {
+  assignedTo?: InputMaybe<UserRelateToManyInput>;
+  canManageFavorites?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: InputMaybe<Scalars["Boolean"]>;
+  name?: InputMaybe<Scalars["String"]>;
+};
+
+export type RoleWhereInput = {
+  AND?: InputMaybe<Array<InputMaybe<RoleWhereInput>>>;
+  OR?: InputMaybe<Array<InputMaybe<RoleWhereInput>>>;
+  /**  condition must be true for all nodes  */
+  assignedTo_every?: InputMaybe<UserWhereInput>;
+  /**  condition must be false for all nodes  */
+  assignedTo_none?: InputMaybe<UserWhereInput>;
+  /**  condition must be true for at least 1 node  */
+  assignedTo_some?: InputMaybe<UserWhereInput>;
+  canManageFavorites?: InputMaybe<Scalars["Boolean"]>;
+  canManageFavorites_not?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides?: InputMaybe<Scalars["Boolean"]>;
+  canManageGuides_not?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles?: InputMaybe<Scalars["Boolean"]>;
+  canManageRoles_not?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers?: InputMaybe<Scalars["Boolean"]>;
+  canManageUsers_not?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers?: InputMaybe<Scalars["Boolean"]>;
+  canSeeOtherUsers_not?: InputMaybe<Scalars["Boolean"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  id_not?: InputMaybe<Scalars["ID"]>;
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  name?: InputMaybe<Scalars["String"]>;
+  name_contains?: InputMaybe<Scalars["String"]>;
+  name_contains_i?: InputMaybe<Scalars["String"]>;
+  name_ends_with?: InputMaybe<Scalars["String"]>;
+  name_ends_with_i?: InputMaybe<Scalars["String"]>;
+  name_i?: InputMaybe<Scalars["String"]>;
+  name_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  name_not?: InputMaybe<Scalars["String"]>;
+  name_not_contains?: InputMaybe<Scalars["String"]>;
+  name_not_contains_i?: InputMaybe<Scalars["String"]>;
+  name_not_ends_with?: InputMaybe<Scalars["String"]>;
+  name_not_ends_with_i?: InputMaybe<Scalars["String"]>;
+  name_not_i?: InputMaybe<Scalars["String"]>;
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  name_not_starts_with?: InputMaybe<Scalars["String"]>;
+  name_not_starts_with_i?: InputMaybe<Scalars["String"]>;
+  name_starts_with?: InputMaybe<Scalars["String"]>;
+  name_starts_with_i?: InputMaybe<Scalars["String"]>;
+};
+
+export type RoleWhereUniqueInput = {
+  id: Scalars["ID"];
+};
+
+export type RolesCreateInput = {
+  data?: InputMaybe<RoleCreateInput>;
+};
+
+export type RolesUpdateInput = {
+  data?: InputMaybe<RoleUpdateInput>;
+  id: Scalars["ID"];
 };
 
 export type SendUserPasswordResetLinkResult = {
@@ -1125,6 +1321,27 @@ export enum SortGuidesBy {
   NameDesc = "name_DESC",
   StatusAsc = "status_ASC",
   StatusDesc = "status_DESC",
+  UserAsc = "user_ASC",
+  UserDesc = "user_DESC",
+}
+
+export enum SortRolesBy {
+  AssignedToAsc = "assignedTo_ASC",
+  AssignedToDesc = "assignedTo_DESC",
+  CanManageFavoritesAsc = "canManageFavorites_ASC",
+  CanManageFavoritesDesc = "canManageFavorites_DESC",
+  CanManageGuidesAsc = "canManageGuides_ASC",
+  CanManageGuidesDesc = "canManageGuides_DESC",
+  CanManageRolesAsc = "canManageRoles_ASC",
+  CanManageRolesDesc = "canManageRoles_DESC",
+  CanManageUsersAsc = "canManageUsers_ASC",
+  CanManageUsersDesc = "canManageUsers_DESC",
+  CanSeeOtherUsersAsc = "canSeeOtherUsers_ASC",
+  CanSeeOtherUsersDesc = "canSeeOtherUsers_DESC",
+  IdAsc = "id_ASC",
+  IdDesc = "id_DESC",
+  NameAsc = "name_ASC",
+  NameDesc = "name_DESC",
 }
 
 export enum SortUsersBy {
@@ -1132,6 +1349,8 @@ export enum SortUsersBy {
   EmailDesc = "email_DESC",
   FavoritesAsc = "favorites_ASC",
   FavoritesDesc = "favorites_DESC",
+  GuidesAsc = "guides_ASC",
+  GuidesDesc = "guides_DESC",
   IdAsc = "id_ASC",
   IdDesc = "id_DESC",
   MagicAuthIssuedAtAsc = "magicAuthIssuedAt_ASC",
@@ -1144,14 +1363,18 @@ export enum SortUsersBy {
   PasswordResetIssuedAtDesc = "passwordResetIssuedAt_DESC",
   PasswordResetRedeemedAtAsc = "passwordResetRedeemedAt_ASC",
   PasswordResetRedeemedAtDesc = "passwordResetRedeemedAt_DESC",
+  RoleAsc = "role_ASC",
+  RoleDesc = "role_DESC",
 }
 
 /**  A keystone list  */
 export type User = {
   __typename?: "User";
   _favoritesMeta?: Maybe<_QueryMeta>;
+  _guidesMeta?: Maybe<_QueryMeta>;
   email?: Maybe<Scalars["String"]>;
   favorites: Array<FavoritesItem>;
+  guides: Array<Guide>;
   id: Scalars["ID"];
   magicAuthIssuedAt?: Maybe<Scalars["String"]>;
   magicAuthRedeemedAt?: Maybe<Scalars["String"]>;
@@ -1161,6 +1384,7 @@ export type User = {
   passwordResetRedeemedAt?: Maybe<Scalars["String"]>;
   passwordResetToken_is_set?: Maybe<Scalars["Boolean"]>;
   password_is_set?: Maybe<Scalars["Boolean"]>;
+  role?: Maybe<Role>;
 };
 
 /**  A keystone list  */
@@ -1174,6 +1398,16 @@ export type User_FavoritesMetaArgs = {
 };
 
 /**  A keystone list  */
+export type User_GuidesMetaArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortGuidesBy>>;
+  where?: InputMaybe<GuideWhereInput>;
+};
+
+/**  A keystone list  */
 export type UserFavoritesArgs = {
   first?: InputMaybe<Scalars["Int"]>;
   orderBy?: InputMaybe<Scalars["String"]>;
@@ -1181,6 +1415,16 @@ export type UserFavoritesArgs = {
   skip?: InputMaybe<Scalars["Int"]>;
   sortBy?: InputMaybe<Array<SortFavoritesItemsBy>>;
   where?: InputMaybe<FavoritesItemWhereInput>;
+};
+
+/**  A keystone list  */
+export type UserGuidesArgs = {
+  first?: InputMaybe<Scalars["Int"]>;
+  orderBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortBy?: InputMaybe<Array<SortGuidesBy>>;
+  where?: InputMaybe<GuideWhereInput>;
 };
 
 export type UserAuthenticationWithPasswordFailure = {
@@ -1202,6 +1446,7 @@ export type UserAuthenticationWithPasswordSuccess = {
 export type UserCreateInput = {
   email?: InputMaybe<Scalars["String"]>;
   favorites?: InputMaybe<FavoritesItemRelateToManyInput>;
+  guides?: InputMaybe<GuideRelateToManyInput>;
   magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
   magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
   magicAuthToken?: InputMaybe<Scalars["String"]>;
@@ -1210,6 +1455,14 @@ export type UserCreateInput = {
   passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
   passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
   passwordResetToken?: InputMaybe<Scalars["String"]>;
+  role?: InputMaybe<RoleRelateToOneInput>;
+};
+
+export type UserRelateToManyInput = {
+  connect?: InputMaybe<Array<InputMaybe<UserWhereUniqueInput>>>;
+  create?: InputMaybe<Array<InputMaybe<UserCreateInput>>>;
+  disconnect?: InputMaybe<Array<InputMaybe<UserWhereUniqueInput>>>;
+  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type UserRelateToOneInput = {
@@ -1222,6 +1475,7 @@ export type UserRelateToOneInput = {
 export type UserUpdateInput = {
   email?: InputMaybe<Scalars["String"]>;
   favorites?: InputMaybe<FavoritesItemRelateToManyInput>;
+  guides?: InputMaybe<GuideRelateToManyInput>;
   magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
   magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
   magicAuthToken?: InputMaybe<Scalars["String"]>;
@@ -1230,6 +1484,7 @@ export type UserUpdateInput = {
   passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
   passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
   passwordResetToken?: InputMaybe<Scalars["String"]>;
+  role?: InputMaybe<RoleRelateToOneInput>;
 };
 
 export type UserWhereInput = {
@@ -1259,6 +1514,12 @@ export type UserWhereInput = {
   favorites_none?: InputMaybe<FavoritesItemWhereInput>;
   /**  condition must be true for at least 1 node  */
   favorites_some?: InputMaybe<FavoritesItemWhereInput>;
+  /**  condition must be true for all nodes  */
+  guides_every?: InputMaybe<GuideWhereInput>;
+  /**  condition must be false for all nodes  */
+  guides_none?: InputMaybe<GuideWhereInput>;
+  /**  condition must be true for at least 1 node  */
+  guides_some?: InputMaybe<GuideWhereInput>;
   id?: InputMaybe<Scalars["ID"]>;
   id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   id_not?: InputMaybe<Scalars["ID"]>;
@@ -1320,6 +1581,8 @@ export type UserWhereInput = {
   >;
   passwordResetToken_is_set?: InputMaybe<Scalars["Boolean"]>;
   password_is_set?: InputMaybe<Scalars["Boolean"]>;
+  role?: InputMaybe<RoleWhereInput>;
+  role_is_null?: InputMaybe<Scalars["Boolean"]>;
 };
 
 export type UserWhereUniqueInput = {

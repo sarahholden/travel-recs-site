@@ -1,8 +1,8 @@
 import Link from "next/link";
 import useUser from "../hooks/User";
-import { useGetFavoritesQuery } from "../types/generated-queries";
+import { Guide, useGetFavoritesQuery } from "../types/generated-queries";
 import SignIn from "./SignIn";
-import Guide from "./Guide";
+import Guides from "./Guides";
 
 export default function Favorites() {
   const user = useUser();
@@ -12,7 +12,6 @@ export default function Favorites() {
   const { data, error, loading } = useGetFavoritesQuery({
     variables: { userId: id },
   });
-  console.log(data, error, loading);
   if (loading) return <div>Loading Spinner</div>;
   if (error) return <div>There was a problem loading this page.</div>;
 
@@ -20,15 +19,11 @@ export default function Favorites() {
     <>
       <h2>My Saved Guides</h2>
       {data?.allFavoritesItems ? (
-        data.allFavoritesItems.map((favorite) => {
-          return (
-            <>
-              {favorite?.guide && (
-                <Guide key={favorite.guide?.id} guide={favorite.guide} />
-              )}
-            </>
-          );
-        })
+        <Guides
+          guides={data?.allFavoritesItems.map(
+            (favoritesItem) => favoritesItem?.guide
+          )}
+        />
       ) : (
         <div>
           You have no saved guides. Explore all guides{" "}

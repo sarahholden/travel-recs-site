@@ -7,6 +7,7 @@ query allGuidesQuery {
     image {
       publicUrlTransformed
     }
+    altText
     destinations {
       id
       name
