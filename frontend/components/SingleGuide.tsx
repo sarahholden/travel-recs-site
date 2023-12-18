@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useGetGuideQuery } from "../types/generated-queries";
+import { Destination, useGetGuideQuery } from "../types/generated-queries";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
 
@@ -44,22 +44,22 @@ export default function SingleGuide({ id }: { id: string }) {
     },
   });
 
-  if (!data) return null;
+  console.log(data, loading, error);
 
   if (error) return <div>Error loading page</div>;
   if (loading) return <div>Loading...</div>;
 
-  const { Guide } = data;
-
-  return Guide ? (
-    <GuideStyles data-test-id="singleGuide">
-      {Guide.name}
-      {Guide.location_info}
-      {Guide.destinations?.map((destination) => destination.name)}
-      {Guide.image?.publicUrlTransformed && (
+  return data?.Guide ? (
+    <GuideStyles data-testid="singleGuide">
+      {data.Guide.name}
+      {data.Guide.location_info}
+      {data.Guide.destinations?.map(
+        (destination: Destination) => destination.name
+      )}
+      {data.Guide.image?.publicUrlTransformed && (
         <img
-          src={Guide.image.publicUrlTransformed}
-          alt={Guide.altText ?? `Image of ${Guide.name}`}
+          src={data.Guide.image.publicUrlTransformed}
+          alt={data.Guide.altText ?? `Image of ${data.Guide.name}`}
         />
       )}
     </GuideStyles>

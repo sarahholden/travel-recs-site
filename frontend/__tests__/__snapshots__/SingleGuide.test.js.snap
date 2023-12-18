@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SingleGuide/> renders with proper data 1`] = `
+<div>
+  <div
+    class="SingleGuide__GuideStyles-sc-1s27dno-0 bAHwUu"
+    data-testid="singleGuide"
+  >
+    New York City
+    The biggest apple in existance
+    <img
+      alt="New York City Skyline"
+      src="dog.jpg"
+    />
+  </div>
+</div>
+`;

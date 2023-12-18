@@ -1,12 +1,9 @@
 import { MockedProvider } from "@apollo/react-testing";
 import { fakeGuide } from "../lib/testUtils";
-import { useGetGuideQuery } from "../types/generated-queries";
 import { render, screen } from "@testing-library/react";
 import SingleGuide, { GET_GUIDE_QUERY } from "../components/SingleGuide";
-import gql from "graphql-tag";
 
 const guide = fakeGuide();
-
 
 
 const mocks = [
@@ -37,9 +34,9 @@ describe("<SingleGuide/>", () => {
       </MockedProvider>
     );
     // Wait for the test ID to show up
-    await screen.getByTestId("singleGuide");
+    await screen.findByTestId("singleGuide");
     debug();
-    // expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
 
