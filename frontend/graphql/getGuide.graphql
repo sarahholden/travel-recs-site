@@ -19,6 +19,5 @@ query getGuide($id: ID!) {
         }
       }
     }
-    
   }
 }

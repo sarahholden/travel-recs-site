@@ -16,5 +16,14 @@ describe('<Guide/>', () => {
     expect(link).toHaveAttribute('href', '/guide/abc123');
     expect(screen.getByText('New York City')).toBeInTheDocument();
     debug(link);
+  });
+
+  it('Renders and matches the snapshot', () => {
+    const { container, debug } = render(
+      <MockedProvider>
+        <Guide guide={guide} />
+      </MockedProvider>
+    );
+    expect(container).toMatchSnapshot();
   })
 })

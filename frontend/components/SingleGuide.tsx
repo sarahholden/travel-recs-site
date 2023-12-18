@@ -1,8 +1,47 @@
+import styled from "styled-components";
 import { useGetGuideQuery } from "../types/generated-queries";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/client";
+
+const GuideStyles = styled.div`
+  background-color: yellow;
+`;
+
+export const GET_GUIDE_QUERY = gql`
+  query GET_GUIDE_QUERY($id: ID!) {
+    Guide(where: { id: $id }) {
+      id
+      name
+      location_info
+      status
+      image {
+        publicUrlTransformed
+      }
+      altText
+      destinations {
+        id
+        name
+        hover_description
+        photo {
+          id
+          image {
+            publicUrlTransformed
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default function SingleGuide({ id }: { id: string }) {
-  const { data, loading, error } = useGetGuideQuery({
-    variables: { id },
+  // const { data, loading, error } = useGetGuideQuery({
+  //   variables: { id },
+  // });
+
+  const { data, loading, error } = useQuery(GET_GUIDE_QUERY, {
+    variables: {
+      id,
+    },
   });
 
   if (!data) return null;
@@ -13,7 +52,7 @@ export default function SingleGuide({ id }: { id: string }) {
   const { Guide } = data;
 
   return Guide ? (
-    <div>
+    <GuideStyles data-test-id="singleGuide">
       {Guide.name}
       {Guide.location_info}
       {Guide.destinations?.map((destination) => destination.name)}
@@ -23,6 +62,6 @@ export default function SingleGuide({ id }: { id: string }) {
           alt={Guide.altText ?? `Image of ${Guide.name}`}
         />
       )}
-    </div>
+    </GuideStyles>
   ) : null;
 }

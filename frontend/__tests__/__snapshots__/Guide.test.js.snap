@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Guide/> Renders and matches the snapshot 1`] = `
+<div>
+  <article
+    class="Guide__GuideStyles-sc-zh7nrp-0 dzznjp"
+  >
+    <div
+      class="image-wrap"
+    >
+      <a
+        href="/guide/abc123"
+      >
+        <img
+          alt="New York City Skyline"
+          src="dog.jpg"
+        />
+      </a>
+    </div>
+    <h2>
+      <a
+        href="/guide/abc123"
+      >
+        New York City
+      </a>
+    </h2>
+    <button
+      aria-label="Add To Favorites"
+    >
+      Heart
+    </button>
+    <p>
+      The biggest apple in existance
+    </p>
+  </article>
+</div>
+`;
