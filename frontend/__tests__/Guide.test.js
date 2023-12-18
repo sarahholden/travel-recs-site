@@ -12,7 +12,9 @@ describe('<Guide/>', () => {
         <Guide guide={guide} />
       </MockedProvider>
     );
-    expect(screen.getByText("New York City")).toBeInTheDocument();
-    debug();
+    const link = container.querySelector('a');
+    expect(link).toHaveAttribute('href', '/guide/abc123');
+    expect(screen.getByText('New York City')).toBeInTheDocument();
+    debug(link);
   })
 })
