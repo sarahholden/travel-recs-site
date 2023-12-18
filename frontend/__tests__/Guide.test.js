@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
 import Guide from '../components/Guide';
 import { fakeGuide } from '../lib/testUtils';
@@ -12,6 +12,7 @@ describe('<Guide/>', () => {
         <Guide guide={guide} />
       </MockedProvider>
     );
+    expect(screen.getByText("New York City")).toBeInTheDocument();
     debug();
   })
 })
