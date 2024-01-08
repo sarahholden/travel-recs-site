@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Nav/> Renders a minimal nav when signed out 1`] = `
+<div>
+  <nav>
+    <ul>
+      <li>
+        <a
+          href="/guides"
+        >
+          Guides
+        </a>
+      </li>
+      <li>
+        <a
+          href="/signin"
+        >
+          Sign In
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
+
+exports[`<Nav/> Renders a minimal nav when signed out 2`] = `
+<div>
+  <nav>
+    <ul>
+      <li>
+        <a
+          href="/guides"
+        >
+          Guides
+        </a>
+      </li>
+      <li>
+        <a
+          href="/signin"
+        >
+          Sign In
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
