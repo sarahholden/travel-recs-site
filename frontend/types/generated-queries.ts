@@ -2020,7 +2020,7 @@ export function useAddToFavoritesMutation(
   baseOptions?: Apollo.MutationHookOptions<
     AddToFavoritesMutation,
     AddToFavoritesMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -2082,24 +2082,24 @@ export function useAllGuidesQueryQuery(
   baseOptions?: Apollo.QueryHookOptions<
     AllGuidesQueryQuery,
     AllGuidesQueryQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>(
     AllGuidesQueryDocument,
-    options
+    options,
   );
 }
 export function useAllGuidesQueryLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     AllGuidesQueryQuery,
     AllGuidesQueryQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<AllGuidesQueryQuery, AllGuidesQueryQueryVariables>(
     AllGuidesQueryDocument,
-    options
+    options,
   );
 }
 export type AllGuidesQueryQueryHookResult = ReturnType<
@@ -2113,7 +2113,7 @@ export type AllGuidesQueryQueryResult = Apollo.QueryResult<
   AllGuidesQueryQueryVariables
 >;
 export function refetchAllGuidesQueryQuery(
-  variables?: AllGuidesQueryQueryVariables
+  variables?: AllGuidesQueryQueryVariables,
 ) {
   return { query: AllGuidesQueryDocument, variables: variables };
 }
@@ -2166,12 +2166,12 @@ export function useCreateGuideMutation(
   baseOptions?: Apollo.MutationHookOptions<
     CreateGuideMutation,
     CreateGuideMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<CreateGuideMutation, CreateGuideMutationVariables>(
     CreateGuideDocument,
-    options
+    options,
   );
 }
 export type CreateGuideMutationHookResult = ReturnType<
@@ -2232,24 +2232,24 @@ export function useGetFavoritesQuery(
   baseOptions: Apollo.QueryHookOptions<
     GetFavoritesQuery,
     GetFavoritesQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetFavoritesQuery, GetFavoritesQueryVariables>(
     GetFavoritesDocument,
-    options
+    options,
   );
 }
 export function useGetFavoritesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetFavoritesQuery,
     GetFavoritesQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetFavoritesQuery, GetFavoritesQueryVariables>(
     GetFavoritesDocument,
-    options
+    options,
   );
 }
 export type GetFavoritesQueryHookResult = ReturnType<
@@ -2263,7 +2263,7 @@ export type GetFavoritesQueryResult = Apollo.QueryResult<
   GetFavoritesQueryVariables
 >;
 export function refetchGetFavoritesQuery(
-  variables: GetFavoritesQueryVariables
+  variables: GetFavoritesQueryVariables,
 ) {
   return { query: GetFavoritesDocument, variables: variables };
 }
@@ -2310,24 +2310,24 @@ export const GetGuideDocument = gql`
  * });
  */
 export function useGetGuideQuery(
-  baseOptions: Apollo.QueryHookOptions<GetGuideQuery, GetGuideQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<GetGuideQuery, GetGuideQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetGuideQuery, GetGuideQueryVariables>(
     GetGuideDocument,
-    options
+    options,
   );
 }
 export function useGetGuideLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetGuideQuery,
     GetGuideQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetGuideQuery, GetGuideQueryVariables>(
     GetGuideDocument,
-    options
+    options,
   );
 }
 export type GetGuideQueryHookResult = ReturnType<typeof useGetGuideQuery>;
@@ -2369,18 +2369,18 @@ export const UserDocument = gql`
  * });
  */
 export function useUserQuery(
-  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
 export function useUserLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(
     UserDocument,
-    options
+    options,
   );
 }
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
@@ -2423,7 +2423,7 @@ export function useRequestResetMutation(
   baseOptions?: Apollo.MutationHookOptions<
     RequestResetMutation,
     RequestResetMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -2480,7 +2480,7 @@ export function useResetPasswordMutation(
   baseOptions?: Apollo.MutationHookOptions<
     ResetPasswordMutation,
     ResetPasswordMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<
@@ -2541,12 +2541,12 @@ export function useSignInMutation(
   baseOptions?: Apollo.MutationHookOptions<
     SignInMutation,
     SignInMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<SignInMutation, SignInMutationVariables>(
     SignInDocument,
-    options
+    options,
   );
 }
 export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
@@ -2585,12 +2585,12 @@ export function useSignOutMutation(
   baseOptions?: Apollo.MutationHookOptions<
     SignOutMutation,
     SignOutMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<SignOutMutation, SignOutMutationVariables>(
     SignOutDocument,
-    options
+    options,
   );
 }
 export type SignOutMutationHookResult = ReturnType<typeof useSignOutMutation>;
@@ -2636,12 +2636,12 @@ export function useSignUpMutation(
   baseOptions?: Apollo.MutationHookOptions<
     SignUpMutation,
     SignUpMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(
     SignUpDocument,
-    options
+    options,
   );
 }
 export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;

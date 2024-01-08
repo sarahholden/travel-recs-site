@@ -15,7 +15,7 @@ describe('<Guide/>', () => {
     const link = container.querySelector('a');
     expect(link).toHaveAttribute('href', '/guide/abc123');
     expect(screen.getByText('New York City')).toBeInTheDocument();
-    debug(link);
+    // debug(link);
   });
 
   it('Renders and matches the snapshot', () => {
