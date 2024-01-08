@@ -25,8 +25,8 @@ describe('<Nav/>', () => {
           <Nav/>
         </MockedProvider>
     )
-    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
-    expect(screen.getByText(/guide/i)).toBeInTheDocument();
+    expect(container).toHaveTextContent(/guides/i)
+    expect(container).toHaveTextContent(/sign in/i)
     debug()
   })
 })
