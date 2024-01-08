@@ -18,7 +18,7 @@ const fakeGuide = () => ({
   status: "AVAILABLE",
 });
 
-const fakeUser = (overrides) => ({
+const fakeUser = (overrides?: any) => ({
   __typename: "User",
   id: "4234",
   name: casual.name,
@@ -51,7 +51,7 @@ const fakeOrder = () => ({
   user: fakeUser(),
 });
 
-const fakeCartItem = (overrides) => ({
+const fakeCartItem = (overrides?: any) => ({
   __typename: "CartItem",
   id: "omg123",
   quantity: 3,
