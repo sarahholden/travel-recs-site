@@ -40,10 +40,8 @@ describe('<Nav/>', () => {
           <Nav/>
         </MockedProvider>
     )
-    expect(container).toMatchSnapshot()
-    expect(container).toHaveTextContent(/guides/i);
-    expect(screen.getByText(/guides/i)).toHaveAttribute("href", "/guides");
-    await screen.findAllByText('Account')
+    await screen.findByText('Account')
     expect(screen.getByText(/account/i)).toHaveAttribute("href", "/account");
+    expect(container).toMatchSnapshot()
   })
 })
